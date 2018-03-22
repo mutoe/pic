@@ -5,7 +5,14 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 
+// normalize.css
+import './assets/stylus/normalize.styl'
+
+// element-ui
 import 'element-ui/lib/theme-chalk/index.css'
+
+// 全局基础样式
+import './assets/stylus/base.styl'
 
 Vue.config.productionTip = false
 
