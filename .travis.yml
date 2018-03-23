@@ -31,6 +31,7 @@ env:
 before_install:
 
 install:
+  - yarn global add codecov
   - yarn
 
 before_script:
@@ -40,9 +41,6 @@ before_script:
 script:
   - yarn test
 
-after_script:
-  - "sh -e /etc/init.d/vxfb stop"
-
 before_deploy:
   - yarn build
 
@@ -51,3 +49,6 @@ deploy:
   github-token: $GH_TOKEN
   local-dir: dist
   skip_cleanup: true
+
+after_script:
+  - codecov
