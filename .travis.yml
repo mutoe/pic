@@ -50,3 +50,4 @@ deploy:
   provider: pages
   github-token: $GH_TOKEN
   local-dir: dist
+  skip_cleanup: true
