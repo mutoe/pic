@@ -9,7 +9,7 @@ import ElementUI from 'element-ui'
 import './assets/stylus/normalize.styl'
 
 // element-ui
-import 'element-ui/lib/theme-chalk/index.css'
+import './assets/stylus/element-ui-chalk.styl'
 
 // 全局基础样式
 import './assets/stylus/base.styl'
