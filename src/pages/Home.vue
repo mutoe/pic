@@ -10,9 +10,7 @@
 <script>
 export default {
   data () {
-    return {
-      title: 'this is home page.',
-    }
+    return {}
   },
 }
 </script>

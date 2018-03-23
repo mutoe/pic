@@ -1,5 +1,7 @@
 # pic
 
+[![Build Status](https://www.travis-ci.org/mutoe/pic.svg?branch=master)](https://www.travis-ci.org/mutoe/pic)
+
 > This time is the vue+nodejs version of the picture site.
 
 ## Build Setup
