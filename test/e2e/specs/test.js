@@ -12,10 +12,7 @@ module.exports = {
       .url(devServer)
       .waitForElementVisible('#app', 5000)
       .assert.elementPresent('.page')
-      .verify.cssProperty('body', 'margin', '0px')
-      .verify.containsText('header', 'header')
-      .verify.containsText('footer', 'footer')
-      .verify.cssProperty('.page', 'background-color', 'rgba(170, 170, 170, 1)')
+      .assert.elementCount('.el-col', 16)
       .end()
   },
 }
