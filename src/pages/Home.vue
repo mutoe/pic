@@ -2,7 +2,7 @@
 
 .page
   el-row
-    el-col(:span='24'): div
+    el-col(:span='24')
 
   el-row
     el-col(:span='12', v-for='(item, index) in new Array(2)', :key='index')
