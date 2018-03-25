@@ -92,7 +92,7 @@ header
   bottom 0
   left 0
   z-index -1
-  background center 0 / cover no-repeat
+  background center 65% / auto no-repeat
   background-image url('/static/images/user_banner.jpg')
 
   .blur
