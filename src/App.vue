@@ -2,7 +2,7 @@
 
 #app
   el-container(direction='vertical')
-    v-header
+    v-header(:page='page')
 
     el-main
       router-view
@@ -20,6 +20,11 @@ export default {
   components: {
     VHeader,
     VFooter,
+  },
+  computed: {
+    page: function () {
+      return this.$route.name.toLowerCase()
+    },
   },
 }
 </script>

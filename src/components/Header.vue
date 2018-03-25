@@ -1,6 +1,6 @@
 <template lang="pug">
 
-header
+header(:class='page')
   .topic
     .blur
 
@@ -22,17 +22,25 @@ header
 <script>
 export default {
   name: 'Header',
+  props: {
+    page: { type: String, default: '' },
+  },
+  data: () => ({}),
 }
 </script>
 
 <style lang="stylus" scoped>
 // 本站导航栏
 $nav-height = 42px
-$header-height = 720px
+$header-height = 180px
 
 header
   position relative
   height $header-height
+  transition .5s
+
+  &.home
+    height 720px
 
 .nav
   height $nav-height
