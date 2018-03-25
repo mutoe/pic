@@ -7,15 +7,15 @@ header
   .nav
     .container
       div.left
-        a(href='/').logo
+        a.noline(href='/').logo
           img(src="/static/images/logo_400x90.png", alt="时光·印象", title="返回首页")
 
-        a(href='#') 分类
+        a.noline(href='#') 分类
 
       div.right
-        a(href='#') 注册
-        a(href='#') 登陆
-        a.danger(href='#') 贴图
+        a.noline(href='#') 注册
+        a.noline(href='#') 登陆
+        a.noline.danger(href='#') 贴图
 
 </template>
 

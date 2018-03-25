@@ -10,9 +10,11 @@ body
   font-size $font-size-base
 
 a
-  position relative
   color inherit
   text-decoration none
+
+a:not(.noline)
+  position relative
 
   &:focus
     outline none
@@ -24,23 +26,32 @@ a
     display block
     width 100%
     height 1px
-    background-color rgba(#fff, .9)
+    background-color rgba($color-text-primary, 0.2)
     content ''
-    opacity 0
     transition all 0.3s
-    transform scaleX(0)
+    transform rotateY(0)
 
   &:hover::after
-  &:focus::after
   &:active::after
-    opacity 1
-    transform scaleX(1)
+  &:focus::after
+    background-color rgba($color-text-primary, 0.9)
+    transform rotateY(180deg)
+
+.dark
+  a:not(.noline)
+    &::after
+      background-color rgba(#fff, 0.4)
+
+    &:hover::after
+    &:active::after
+    &:focus::after
+      background-color rgba(#fff, 0.9)
 
 ul
-  list-style none
   margin 0
   padding 0
+  list-style none
 
 .container
-  width 1200px
   margin 0 auto
+  width 1200px
