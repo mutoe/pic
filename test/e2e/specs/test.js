@@ -11,9 +11,9 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('#app', 5000)
-      .verify.elementPresent('.el-header')
+      .verify.elementPresent('header')
       .verify.elementPresent('.page')
-      .verify.elementPresent('.el-footer')
+      .verify.elementPresent('footer')
       .end()
   },
 }
