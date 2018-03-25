@@ -7,11 +7,8 @@ import router from '@/router'
 // ElementUI 组件
 import EleUI from '@/theme/components'
 
-// normalize.css
-import './assets/stylus/normalize.styl'
-
-// 全局基础样式
-import './assets/stylus/base.styl'
+// 样式入口
+import './assets/stylus/index.styl'
 
 // 注册 ElementUI 组件
 for (let Component of EleUI.plugins) Vue.use(Component)
