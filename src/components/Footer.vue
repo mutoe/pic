@@ -73,7 +73,7 @@ ul.copyright
 
 <style lang="stylus">
 
-.info-dialog
+.el-message-box.info-dialog.dark
   background-color rgba($color-background-dark, 0.8)
 
   .el-message-box__title

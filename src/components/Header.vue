@@ -73,7 +73,7 @@ header
       a
         transition .3s
 
-        &:hover:not(.logo)
+        &:not(.logo):not(.danger):hover
           background-color rgba(#fff, 0.8)
 
         &.logo img
