@@ -55,17 +55,18 @@ body
 .el-container
   height 100%
 
-header
-footer
-  flex 0 0 auto
-
 body
   overflow-y scroll
 
-.el-main
-  flex 1 0 auto
-  overflow-x hidden
-  transition all 0.3s
+#app
+  header
+  footer
+    flex 0 0 auto
+
+  .el-main
+    flex 1 0 auto
+    overflow-x hidden
+    transition all 0.3s
 
 .child-view
   position relative
