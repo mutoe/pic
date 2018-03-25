@@ -7,14 +7,14 @@ header
   .nav
     .container
       div.left
-        a.noline(href='/').logo
+        router-link.noline(:to=`{ name: 'Home' }`).logo
           img(src="/static/images/logo_400x90.png", alt="时光·印象", title="返回首页")
 
         a.noline(href='#') 分类
 
       div.right
-        a.noline(href='#') 注册
-        a.noline(href='#') 登陆
+        router-link.noline(:to=`{ name: 'Register' }`) 注册
+        router-link.noline(:to=`{ name: 'Login' }` ) 登录
         a.noline.danger(href='#') 贴图
 
 </template>
