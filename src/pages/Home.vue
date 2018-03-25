@@ -1,21 +1,5 @@
 <template lang="pug">
-
-.page
-  el-row
-    el-col(:span='24')
-
-  el-row
-    el-col(:span='12', v-for='(item, index) in new Array(2)', :key='index')
-
-  el-row
-    el-col(:span='8', v-for='(item, index) in new Array(3)', :key='index')
-
-  el-row
-    el-col(:span='6', v-for='(item, index) in new Array(4)', :key='index')
-
-  el-row
-    el-col(:span='4', v-for='(item, index) in new Array(6)', :key='index')
-
+.page this is home page
 </template>
 
 <script>
