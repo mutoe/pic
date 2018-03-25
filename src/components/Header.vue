@@ -1,20 +1,20 @@
 <template lang="pug">
 
-header
+header(:class='page')
   .topic
     .blur
 
   .nav
     .container
       div.left
-        a.noline(href='/').logo
+        router-link.noline(:to=`{ name: 'Home' }`).logo
           img(src="/static/images/logo_400x90.png", alt="时光·印象", title="返回首页")
 
         a.noline(href='#') 分类
 
       div.right
-        a.noline(href='#') 注册
-        a.noline(href='#') 登陆
+        router-link.noline(:to=`{ name: 'Register' }`) 注册
+        router-link.noline(:to=`{ name: 'Login' }` ) 登录
         a.noline.danger(href='#') 贴图
 
 </template>
@@ -22,17 +22,25 @@ header
 <script>
 export default {
   name: 'Header',
+  props: {
+    page: { type: String, default: '' },
+  },
+  data: () => ({}),
 }
 </script>
 
 <style lang="stylus" scoped>
 // 本站导航栏
 $nav-height = 42px
-$header-height = 720px
+$header-height = 180px
 
 header
   position relative
   height $header-height
+  transition .5s
+
+  &.home
+    height 720px
 
 .nav
   height $nav-height
@@ -50,8 +58,6 @@ header
       background-color rgb($color-danger)
 
   .container
-    width 1200px
-    margin 0 auto
     display flex
     justify-content space-between
 
@@ -86,7 +92,7 @@ header
   bottom 0
   left 0
   z-index -1
-  background center 0 / cover no-repeat
+  background center 65% / auto no-repeat
   background-image url('/static/images/user_banner.jpg')
 
   .blur
