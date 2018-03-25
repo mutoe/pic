@@ -50,8 +50,6 @@ header
       background-color rgb($color-danger)
 
   .container
-    width 1200px
-    margin 0 auto
     display flex
     justify-content space-between
 
