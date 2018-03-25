@@ -11,8 +11,9 @@ module.exports = {
     browser
       .url(devServer)
       .waitForElementVisible('#app', 5000)
-      .assert.elementPresent('.page')
-      .assert.elementCount('.el-col', 16)
+      .verify.elementPresent('.el-header')
+      .verify.elementPresent('.page')
+      .verify.elementPresent('.el-footer')
       .end()
   },
 }
