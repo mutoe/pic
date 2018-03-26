@@ -29,3 +29,12 @@ yarn e2e
 # run all tests
 yarn test
 ```
+
+## Related Links
+
+### Validator
+
+ElementUI has built-in async-validator component for form validation rules  
+
+async-validator  
+https://github.com/yiminghe/async-validator

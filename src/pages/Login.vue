@@ -9,44 +9,48 @@
       el-col(:lg=12, :md=16, :sm=18, :xs=24)
         el-form(:model='formLogin', :rules='rules', ref='formLogin')
           el-form-item(prop='email')
-            el-input(v-model='formLogin.email', placeholder='Email', clearable)
+            el-input(v-model='formLogin.email', type='email', placeholder='Email', clearable)
           el-form-item(prop='password')
-            el-input(v-model='formLogin.password', placeholder='密码', clearable)
+            el-input(v-model='formLogin.password', type='password', placeholder='密码', clearable)
           el-form-item
             el-checkbox(v-model='formLogin.remember') 记住我 #[small 请不要再公用电脑勾选此选项]
 
           el-form-item.buttons
-            el-button.btn-login(type='primary', @click='onLogin') 注 册
-            el-button(type='text', @click=`$router.push({ name: 'Register' })`) 已有账号, 去登陆
+            el-button.btn-login(type='primary', @click='onSubmit') 登 陆
+            el-button(type='text', @click=`$router.push({ name: 'Register' })`) 去注册
             //- el-button(type='text', @click=`$router.push({ name: 'ResetPassword' })`) 忘记密码 ?
 
 </template>
 
 <script>
+import { validator } from '@/utils'
+
+// 解构待验证字段
+const { email, password } = validator.fields
+
 export default {
   data () {
     return {
       formLogin: {
         email: '',
-        username: '',
         password: '',
         remember: false,
       },
-      rules: validator,
+      rules: { email, password },
     }
   },
   methods: {
-    onLogin () {
+    onSubmit () {
       console.log(this.formLogin)
-      this.$message(JSON.stringify(this.formLogin))
+
+      // validate 方法返回一个 Promise 对象
+      let valid = this.$refs['formLogin'].validate()
+      valid.then(() => {
+        // post data
+        this.$message('数据验证通过, 准备 post')
+      }).catch(e => e)
     },
   },
-}
-
-const validator = {
-  email: [
-    { required: true, message: '请输入电子邮件地址', trigger: 'submit' },
-  ],
 }
 
 </script>
