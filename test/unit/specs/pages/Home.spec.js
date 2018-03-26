@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import Home from '@/pages/Home'
+import Index from '@/pages/home/Index'
 
-describe('Home.vue', () => {
+describe('page home Index.vue', () => {
   it('should render correct contents', () => {
-    const Constructor = Vue.extend(Home)
+    const Constructor = Vue.extend(Index)
     const vm = new Constructor().$mount()
     expect(vm.$el.textContent).toBe('Pending content.')
   })
