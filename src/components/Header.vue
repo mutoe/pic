@@ -7,7 +7,7 @@ header(:class='page')
   .nav
     .container
       div.left
-        router-link.noline(:to=`{ name: 'Home' }`).logo
+        router-link.noline(:to=`{ name: 'Index' }`).logo
           img(src="/static/images/logo_400x90.png", alt="时光·印象", title="返回首页")
 
         a.noline(href='#') 分类
@@ -39,7 +39,7 @@ header
   height $header-height
   transition .5s
 
-  &.home
+  &.index
     height 720px
 
 .nav
