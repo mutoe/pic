@@ -25,4 +25,9 @@ export default new Router({
       component: Register,
     },
   ],
+
+  // 切换到新路由时，页面滚到顶部，或保持原先的滚动位置
+  scrollBehavior (to, from, savedPosition) {
+    return savedPosition || { x: 0, y: 0 }
+  },
 })
