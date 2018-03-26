@@ -8,7 +8,7 @@
     el-row(type='flex', justify='center')
       el-col(:lg=12, :md=16, :sm=18, :xs=24)
         el-alert(
-          title='请注意, 在测试期间您的数据可能会出现错乱甚至丢失的情况. 如果您在测试期间遇到了任何问题, 可以联系我.'
+          title='请注意, 在测试期间您的数据可能会出现错乱甚至丢失的情况. 如果您在测试期间遇到了任何问题, 可以在页面底部找到我的联系方式.'
           type='warning')
 
     el-row(type='flex', justify='center')
