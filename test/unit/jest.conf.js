@@ -18,6 +18,7 @@ module.exports = {
     '<rootDir>/test/e2e',
     '<rootDir>/test/api',
   ],
+  verbose: true,
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
   setupFiles: ['<rootDir>/test/unit/setup'],
   coverageDirectory: '<rootDir>/test/unit/coverage',

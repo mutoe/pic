@@ -12,6 +12,8 @@ language: node_js
 
 node_js:
   - stable
+  - 8
+  - 6
 
 cache:
   yarn: true
@@ -54,6 +56,9 @@ deploy:
   skip_cleanup: true
   on:
     all_branches: true
+    node: stable
 
-after_script:
+after_deploy:
   - codecov
+
+after_script: true
