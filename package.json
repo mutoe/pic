@@ -11,12 +11,16 @@
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     "build": "node build/build.js",
-    "serve": "http-server dist/ -o",
-    "start": "npm run build && npm run serve"
+    "preview": "http-server dist/ -o",
+    "server:start": "pm2 start server --name pic-server --log-date-format \"YYYY-MM-DD HH:mm:ss.SSS\"",
+    "server:log": "pm2 log pic-server",
+    "server:stop": "pm2 stop pic-server",
+    "server:dev": "pm2-dev server"
   },
   "dependencies": {
     "element-ui": "^2.2.2",
     "koa": "^2.5.0",
+    "pm2": "^2.10.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
