@@ -1,6 +1,8 @@
 const Koa = require('koa')
 const Router = require('koa-router')
 
+const config = require('./config')
+
 const app = new Koa()
 const router = Router()
 
@@ -15,6 +17,8 @@ router.all('*', async ctx => {
 app.use(router.routes())
 app.use(router.allowedMethods())
 
-app.listen(3001)
+app.listen(config.port, () => {
+  console.log(`Pic server is listening in ${config.port}...`)
+})
 
 module.exports = app
