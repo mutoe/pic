@@ -1,0 +1,20 @@
+{
+  "name": "pic-server",
+  "version": "0.1.0",
+  "description": "api server for mutoe/pic",
+  "main": "index.js",
+  "author": "mutoe",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "pm2 start .pm2.yml --only server",
+    "dev": "pm2 start .pm2.yml --only dev-server"
+  },
+  "dependencies": {
+    "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "pm2": "^2.10.1"
+  }
+}

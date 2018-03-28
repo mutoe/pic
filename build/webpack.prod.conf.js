@@ -118,9 +118,14 @@ const webpackConfig = merge(baseWebpackConfig, {
         from: path.resolve(__dirname, '../static'),
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
-      }
-    ])
-  ]
+      },
+      {
+        from: path.resolve(__dirname, '../server'),
+        to: config.build.assetsServerDirectory,
+        ignore: ['node_modules', '.eslintrc', 'runtime'],
+      },
+    ]),
+  ],
 })
 
 if (config.build.productionGzip) {

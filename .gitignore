@@ -16,7 +16,7 @@ node_modules/
 /dist/
 
 # Runtime
-/runtime/
+/server/runtime/
 
 # Log files
 npm-debug.log*
