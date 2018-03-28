@@ -2,6 +2,7 @@
 branches:
   only:
     - master
+    - develop
 
 sudo: required
 
@@ -11,6 +12,7 @@ language: node_js
 
 node_js:
   - stable
+  - 8
 
 cache:
   yarn: true
@@ -28,7 +30,7 @@ env:
     - DISPLAY=:99.0
     - CHROME_BIN=/usr/bin/google-chrome
 
-before_install:
+before_install: true
 
 install:
   - yarn global add codecov
@@ -39,7 +41,9 @@ before_script:
   - sleep 3
 
 script:
-  - yarn test
+  - yarn unit
+  - yarn api
+  - yarn e2e
 
 before_deploy:
   - yarn build
@@ -49,6 +53,11 @@ deploy:
   github-token: $GH_TOKEN
   local-dir: dist
   skip_cleanup: true
+  on:
+    all_branches: true
+    node: stable
 
-after_script:
+after_deploy:
   - codecov
+
+after_script: true

@@ -19,6 +19,7 @@ let dialogHtml = `
   <li>Coding by <a href="http://blog.mutoe.com/" target="_blank">mutoe</a>.</li>
   <li>The code is hosted on <a href="https://github.com/mutoe/pic" target="_blank">Github</a> under MIT license.</li>
   <li>Cloud computing service provided by <a href="https://www.aliyun.com/" target="_blank">Aliyun</a>.</li>
+  <li><a href="mailto:mutoe@foxmail.com?body=From http://pic.mutoe.com/ footer">Send Email to me</a>.</li>
 </ul>
 `
 

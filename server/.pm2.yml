@@ -1,0 +1,18 @@
+apps:
+  -
+    name: server
+    script: ./index.js
+    watch: true
+    log_date_format: YYYY-MM-DD HH:mm:ss.SSS
+    error_file: ./runtime/logs/error.log
+    out_file: ./runtime/logs/output.log
+
+  -
+    name: dev-server
+    script: ./index.js
+    watch: ['server']
+    ignore_watch: ['node_modules']
+    max_restarts: 3
+    log_date_format: YYYY-MM-DD HH:mm:ss.SSS
+    error_file: ./runtime/logs/dev.error.log
+    out_file: ./runtime/logs/dev.output.log

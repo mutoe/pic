@@ -1,22 +1,24 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
-import router from './router'
-import ElementUI from 'element-ui'
+import axios from 'axios'
 
-// normalize.css
-import './assets/stylus/normalize.styl'
+import App from '@/App'
+import router from '@/router'
 
-// element-ui
-import './assets/stylus/element-ui-chalk.styl'
+// ElementUI 组件
+import EleUI from '@/theme/components'
 
-// 全局基础样式
-import './assets/stylus/base.styl'
+// 样式入口
+import './assets/stylus/index.styl'
+
+// 注册 ElementUI 组件
+for (let Component of EleUI.plugins) Vue.use(Component)
+for (let key in EleUI.proto) Vue.prototype[key] = EleUI.proto[key]
+
+Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
-
-Vue.use(ElementUI)
 
 /* eslint-disable no-new */
 new Vue({
