@@ -2,6 +2,7 @@ apps:
   -
     name: server
     script: ./index.js
+    watch: true
     log_date_format: YYYY-MM-DD HH:mm:ss.SSS
     error_file: ./runtime/logs/error.log
     out_file: ./runtime/logs/output.log
