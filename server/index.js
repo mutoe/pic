@@ -1,24 +1,18 @@
 const Koa = require('koa')
-const Router = require('koa-router')
 
 const config = require('./config')
+const router = require('./routes')
 
+// 创建应用实例
 const app = new Koa()
-const router = Router()
 
-router.get('/', async ctx => {
-  ctx.body = 'hello world'
-})
-
-router.all('*', async ctx => {
-  ctx.throw(500)
-})
-
+// 挂载路由
 app.use(router.routes())
-app.use(router.allowedMethods())
 
+// 开启监听端口
 app.listen(config.port, () => {
   console.log(`Pic server is listening in ${config.port}...`)
 })
 
+// 导出实例
 module.exports = app

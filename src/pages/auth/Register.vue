@@ -55,7 +55,7 @@ export default {
       })
     },
     postForm (postData) {
-      return this.$http.post('/api/auth/register', postData)
+      return this.$http.post('/auth/user', postData)
         .then(res => {
           console.log(res)
         })
