@@ -13,10 +13,13 @@ middlewares(app)
 // 挂载路由
 app.use(router.routes())
 
-// 开启监听端口
-app.listen(config.port, () => {
-  console.log(`==== Pic Server Start ==== (in port ${config.port})`)
-})
+/* istanbul ignore if */
+if (process.env.NODE_ENV !== 'test') {
+  // 启动服务
+  app.listen(config.port, () => {
+    console.log(`==== Pic Server Start ==== (in port ${config.port})`)
+  })
+}
 
-// 导出实例
+// 导出实例 (用于测试)
 module.exports = app
