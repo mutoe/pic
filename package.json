@@ -23,6 +23,7 @@
     "element-ui": "^2.2.2",
     "koa": "^2.5.0",
     "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^3.2.0",
     "koa-router": "^7.4.0",
     "pm2": "^2.10.1",
     "vue": "^2.5.2",
@@ -95,5 +96,9 @@
     "node": ">= 6.0.0",
     "npm": ">= 3.0.0"
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

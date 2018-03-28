@@ -7,12 +7,10 @@ const router = new Router()
 router.post('register', '/user', (ctx, next) => {
   ctx.body = ctx.request.body
 })
-// router.redirect('/register', 'register')
 
 // 登陆
 router.get('login', '/user/:user_id', (ctx, next) => {
   ctx.body = ctx.request.body
 })
-// router.redirect('/login', 'login')
 
 module.exports = router
