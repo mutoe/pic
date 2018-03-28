@@ -13,10 +13,10 @@
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     "build": "node build/build.js",
     "preview": "http-server dist/ -o",
-    "server:start": "pm2 start server --name pic-server --log-date-format \"YYYY-MM-DD HH:mm:ss.SSS\"",
+    "server:start": "pm2 start .pm2.yml --only server",
     "server:log": "pm2 log pic-server",
     "server:stop": "pm2 stop pic-server",
-    "server:dev": "pm2-dev server"
+    "server:dev": "pm2 start .pm2.yml --only dev-server"
   },
   "dependencies": {
     "axios": "^0.18.0",
