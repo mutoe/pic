@@ -1,7 +1,6 @@
-
-// 监听端口
-const port = 3001
-
 module.exports = {
-  port
+
+  // 服务端监听端口
+  port: 3001,
+
 }
