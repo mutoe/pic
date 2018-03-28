@@ -49,14 +49,19 @@ export default {
   },
   methods: {
     onSubmit () {
-      console.log(this.formRegister)
-
-      // validate 方法返回一个 Promise 对象
-      let valid = this.$refs['formRegister'].validate()
-      valid.then(() => {
-        // post data
-        this.$message('数据验证通过, 准备 post')
-      }).catch(e => e)
+      // 表单验证
+      this.$refs['formRegister'].validate(valid => {
+        if (valid) this.postForm(this.formRegister)
+      })
+    },
+    postForm (postData) {
+      return this.$http.post('/api/auth/register', postData)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.error(err)
+        })
     },
   },
 }

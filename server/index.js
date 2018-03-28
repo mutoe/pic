@@ -11,7 +11,7 @@ router.get('/', async ctx => {
 })
 
 router.all('*', async ctx => {
-  ctx.throw(404)
+  ctx.throw(500)
 })
 
 app.use(router.routes())

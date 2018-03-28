@@ -19,6 +19,7 @@
     "server:dev": "pm2-dev server"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "element-ui": "^2.2.2",
     "koa": "^2.5.0",
     "koa-router": "^7.4.0",
