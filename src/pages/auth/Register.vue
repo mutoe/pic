@@ -39,9 +39,9 @@ export default {
   data () {
     return {
       formRegister: {
-        email: '',
-        username: '',
-        password: '',
+        email: 'testuser@mutoe.com',
+        username: 'testuser',
+        password: '123456',
         agreement: true,
       },
       rules: { email, username, password, agreement },
