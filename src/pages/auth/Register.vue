@@ -51,7 +51,9 @@ export default {
     onSubmit () {
       // 表单验证
       this.$refs['formRegister'].validate(valid => {
-        if (valid) this.postForm(this.formRegister)
+        if (!valid) return
+        const postData = Object.assign({}, this.formRegister)
+        this.postForm(postData)
       })
     },
     postForm (postData) {

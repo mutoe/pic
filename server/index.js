@@ -1,10 +1,13 @@
 const Koa = require('koa')
+const bodyParser = require('koa-bodyparser')
 
 const config = require('./config')
 const router = require('./routes')
 
 // 创建应用实例
 const app = new Koa()
+
+app.use(bodyParser())
 
 // 挂载路由
 app.use(router.routes())
