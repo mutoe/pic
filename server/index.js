@@ -1,20 +1,14 @@
 const Koa = require('koa')
-const BodyParser = require('koa-bodyparser')
-const Logger = require('koa-logger')
 
 const config = require('./config')
+const middlewares = require('./middlewares')
 const router = require('./routes')
 
 // 创建应用实例
 const app = new Koa()
 
-app.use(BodyParser())
-app.use(Logger())
-
-app.use(async (ctx, next) => {
-  await next()
-  ctx.set('X-Powered-By', 'Koa2')
-})
+// 挂载中间件
+middlewares(app)
 
 // 挂载路由
 app.use(router.routes())
