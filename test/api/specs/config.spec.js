@@ -1,4 +1,4 @@
-const config = require('../../server/config')
+const config = require('@/config')
 
 describe('server config', () => {
   describe('port', () => {

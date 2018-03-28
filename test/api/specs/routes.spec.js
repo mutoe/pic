@@ -1,7 +1,7 @@
 const Koa = require('koa')
 const BodyParser = require('koa-bodyparser')
 const request = require('supertest')
-const router = require('../../server/routes')
+const router = require('@/routes')
 
 const app = new Koa()
 

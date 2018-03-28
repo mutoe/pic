@@ -1,5 +1,5 @@
 const request = require('supertest')
-const app = require('../../server/index.js')
+const app = require('@/index.js')
 
 app.use(async (ctx, next) => {
   ctx.body = 'hello world'
@@ -8,9 +8,9 @@ app.use(async (ctx, next) => {
 
 const http = request(app.listen())
 
-describe('test index.js', () => {
-  it('should be work', async () => {
-    await http.get('/')
+describe('App server', () => {
+  it('should be work normally', () => {
+    http.get('/')
       .expect(200)
       .expect('hello world')
   })
