@@ -1,0 +1,13 @@
+
+root: true
+
+extends: standard
+
+rules:
+  comma-dangle:
+    - error
+    - always-multiline
+
+  object-curly-spacing:
+    - error
+    - always
