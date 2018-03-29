@@ -24,7 +24,7 @@
             el-checkbox(v-model='formRegister.agreement') 我同意
 
           el-form-item.buttons
-            el-button.btn-register(type='primary', @click='onSubmit') 注册
+            el-button.btn-register(type='primary', @click='onSubmit', :loading='btnLoading') 注册
             el-button(type='text', @click=`$router.push({ name: 'Login' })`) 已有账号, 去登陆
 
 </template>
@@ -45,6 +45,7 @@ export default {
         agreement: true,
       },
       rules: { email, username, password, agreement },
+      btnLoading: false,
     }
   },
   methods: {
@@ -57,12 +58,20 @@ export default {
       })
     },
     postForm (postData) {
-      return this.$http.post('/api/auth/user', postData)
+      this.btnLoading = true
+      return this.$http.post('/api/auth/user')
         .then(res => {
+          const { data } = res
           console.log(res)
+          this.$message(JSON.stringify(data))
         })
         .catch(err => {
-          console.error(err)
+          console.warn(err.response)
+          const { status, data: message } = err.response
+          this.$message.error(`${status} ${message}`)
+        })
+        .finally(() => {
+          this.btnLoading = false
         })
     },
   },

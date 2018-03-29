@@ -16,6 +16,7 @@ import './assets/stylus/index.styl'
 for (let Component of EleUI.plugins) Vue.use(Component)
 for (let key in EleUI.proto) Vue.prototype[key] = EleUI.proto[key]
 
+// 挂载 HTTP 请求
 Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
