@@ -57,7 +57,7 @@ export default {
       })
     },
     postForm (postData) {
-      return this.$http.post('/auth/user', postData)
+      return this.$http.post('/api/auth/user', postData)
         .then(res => {
           console.log(res)
         })
