@@ -7,6 +7,20 @@ body
   color $color-text-primary
   font-size $font-size-base
 
+  &::-webkit-scrollbar-track
+    border-radius 6px
+    background-color #F5F5F5
+    -webkit-box-shadow inset 0 0 6px rgba(0, 0, 0, 0.3)
+
+  &::-webkit-scrollbar
+    width 8px
+    background-color #F5F5F5
+
+  &::-webkit-scrollbar-thumb
+    border-radius 10px
+    background-color #ff3a3a
+    -webkit-box-shadow inset 0 0 6px rgba(0, 0, 0, 0.3)
+
 ul
   margin 0
   padding 0
