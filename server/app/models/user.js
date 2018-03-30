@@ -11,14 +11,18 @@ const UserModel = mongoose.model('User', UserSchema)
 
 UserSchema.statics = {
 
-  create (fields) {
+  /**
+   * 创建用户
+   * @param {{email: String, username: String, password: String}} fields 创建用户所需字段
+   */
+  async create (fields) {
     const { email, username, password } = fields
     const user = new UserModel({ email, username, password })
     return user.save()
       .then(() => Promise.resolve(user))
       .catch(err => Promise.reject({
-        status: 500,
-        message: '数据写入失败',
+        code: 500,
+        msg: '数据写入失败',
         payload: err,
       }))
   },

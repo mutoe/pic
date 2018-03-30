@@ -4,9 +4,8 @@ const userServs = {
   /**
    * 创建用户业务
    * @param {{username: String, email: String, password: String}} fields
-   * @return {Promise}
    */
-  create (fields) {
+  async create (fields) {
     const { username, email } = fields
 
     // 遍历两个字段 (username, email), 检查字段是否已存在
@@ -19,8 +18,8 @@ const userServs = {
           if (Object.keys(user || {}).length === 0) return Promise.resolve()
           // 否则 reject 给上游, 附带提示信息
           return Promise.reject({
-            status: 400,
-            message: `${key} 已存在`,
+            code: 400,
+            msg: `${key} 已存在`,
             payload: { type: 'field_exist', content: key },
           })
         })

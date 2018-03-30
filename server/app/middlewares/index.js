@@ -18,11 +18,20 @@ module.exports = app => {
       await next()
     } catch (err) {
       ctx.set('x-powered-by', 'Koa2')
-      ctx.status = err.status
-      // ctx.message = err.message
-      ctx.body = {
-        message: err.message,
-        payload: err.payload,
+
+      if (err.code) {
+        ctx.status = err.code
+        ctx.body = {
+          message: err.msg,
+          ...err.payload,
+        }
+      } else {
+        console.error(err)
+        ctx.status = err.status
+        ctx.body = {
+          message: err.message,
+          stack: err.stack,
+        }
       }
     }
   })
