@@ -13,7 +13,7 @@ apps:
     script: ./index.js
     watch: true
     ignore_watch: ['node_modules', 'runtime']
-    max_restarts: 3
+    max_restarts: 1
     log_date_format: YYYY-MM-DD HH:mm:ss.SSS
     error_file: ./runtime/logs/dev.error.log
     out_file: ./runtime/logs/dev.output.log
