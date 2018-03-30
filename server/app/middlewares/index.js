@@ -14,9 +14,10 @@ module.exports = app => {
   // others
   app.use(async (ctx, next) => {
     try {
+      ctx.set('x-powered-by', 'Koa2')
       await next()
     } catch (err) {
-      ctx.set('X-Powered-By', 'Koa2')
+      ctx.set('x-powered-by', 'Koa2')
       ctx.status = err.status
       // ctx.message = err.message
       ctx.body = {

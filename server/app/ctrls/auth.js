@@ -4,6 +4,9 @@ const userServs = require('../services/user')
 const authCtrl = {
   async register (ctx, next) {
     const fields = _.pick(ctx.request.body, ['email', 'username', 'password'])
+    if (Object.keys(fields).length !== 3) {
+      return ctx.throw(400)
+    }
 
     const result = await userServs.create(fields)
     result.then(userInfo => {
