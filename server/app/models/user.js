@@ -7,23 +7,20 @@ const UserSchema = new mongoose.Schema({
   create_time: { type: Date, default: Date.now },
 })
 
-const UserModel = global.db.model('User', UserSchema)
+const UserModel = mongoose.model('User', UserSchema)
 
 UserSchema.statics = {
 
-  async create (fields) {
-    return new Promise((resolve, reject) => {
-      const { email, username, password } = fields
-      const user = new UserModel({
-        email,
-        username,
-        password,
-      })
-      user.save(err => {
-        if (err) return reject(err)
-        resolve(user)
-      })
-    })
+  create (fields) {
+    const { email, username, password } = fields
+    const user = new UserModel({ email, username, password })
+    return user.save()
+      .then(() => Promise.resolve(user))
+      .catch(err => Promise.reject({
+        status: 500,
+        message: '数据写入失败',
+        payload: err,
+      }))
   },
 
 }

@@ -2,18 +2,22 @@ const _ = require('lodash/core')
 const userServs = require('../services/user')
 
 const authCtrl = {
-  async retister (ctx) {
+  async register (ctx, next) {
     const fields = _.pick(ctx.request.body, ['email', 'username', 'password'])
 
-    await userServs.create(fields)
-      .then(userInfo => {
-        ctx.status = 201
-        ctx.body = userInfo.userId
-      })
-      .catch(err => {
-        ctx.throw(err.status, err.msg, err.payload)
-      })
+    const result = await userServs.create(fields)
+    result.then(userInfo => {
+      ctx.status = 201
+      ctx.body = userInfo.userId
+    }).catch(err => {
+      if (err.status) return ctx.throw(err)
+      ctx.throw({ status: 500, payload: err })
+    })
+
+    await next()
   },
+
+  async login (ctx, next) {},
 }
 
 module.exports = authCtrl
