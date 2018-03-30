@@ -59,7 +59,7 @@ export default {
     },
     postForm (postData) {
       this.btnLoading = true
-      return this.$http.post('/api/auth/user')
+      return this.$http.post('/api/auth/user', postData)
         .then(res => {
           const { data } = res
           console.log(res)

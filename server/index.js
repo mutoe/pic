@@ -1,8 +1,11 @@
 const Koa = require('koa')
+const mongoose = require('mongoose')
 
 const config = require('./config')
-const middlewares = require('./middlewares')
-const router = require('./routes')
+const middlewares = require('./app/middlewares')
+const router = require('./app/routes')
+
+mongoose.connect('mongodb://localhost/pic')
 
 // 创建应用实例
 const app = new Koa()
