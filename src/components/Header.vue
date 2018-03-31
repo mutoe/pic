@@ -26,8 +26,11 @@ export default {
   props: {
     page: { type: String, default: '' },
   },
-  computed: {
-    JWToken () { return this.localStorage.getItem('JWToken') },
+  data () {
+    return {
+      // TODO: 登陆状态使用 vuex + cookie 管理
+      JWToken: false,
+    }
   },
   methods: {
     onLogout () {

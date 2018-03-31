@@ -1,17 +1,17 @@
 const Koa = require('koa')
-const BodyParser = require('koa-bodyparser')
+const middlewares = require('@/app/middlewares')
 const request = require('supertest')
 const router = require('@/app/routes')
 
 const app = new Koa()
 
-app.use(BodyParser())
+middlewares(app)
 app.use(router.routes())
 
 const http = request(app.listen())
 
 describe('Mount the routing', () => {
-  describe('POST /auth/register', () => {
+  describe('POST /api/auth/register', () => {
     it('should be return 400 without payload', async () => {
       await http.post('/api/auth/register')
         .expect(400)

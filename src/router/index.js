@@ -19,6 +19,9 @@ const router = new Router({
 
     // Pic 模块
     ...PicRouter,
+
+    // 没有匹配到路由时返回首页
+    { path: '*', redirect: '/' },
   ],
 
   // 切换到新路由时，页面滚到顶部，或保持原先的滚动位置
