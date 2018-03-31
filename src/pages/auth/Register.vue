@@ -14,9 +14,14 @@
     el-row(type='flex', justify='center')
       el-col(:lg=12, :md=16, :sm=18, :xs=24)
         el-form(:model='formRegister', :rules='rules', ref='formRegister')
-          el-form-item(prop='email')
-            el-input(v-model='formRegister.email',type='email', placeholder='Email', :autofocus='true', clearable)
-          el-form-item(prop='username')
+          el-form-item(prop='email', :error='fieldErr.email')
+            el-input(v-model='formRegister.email',
+                type='email',
+                placeholder='Email',
+                :autofocus='true',
+                clearable)
+
+          el-form-item(prop='username', :error='fieldErr.username')
             el-input(v-model='formRegister.username', placeholder='用户名', clearable)
           el-form-item(prop='password')
             el-input(v-model='formRegister.password', type='password', placeholder='密码', clearable)
@@ -45,6 +50,7 @@ export default {
         agreement: true,
       },
       rules: { email, username, password, agreement },
+      fieldErr: {},
       btnLoading: false,
     }
   },
@@ -59,20 +65,38 @@ export default {
     },
     postForm (postData) {
       this.btnLoading = true
-      return this.$http.post('/api/auth/user', postData)
-        .then(res => {
-          const { data } = res
-          console.log(res)
-          this.$message(JSON.stringify(data))
-        })
-        .catch(err => {
-          console.warn(err.response)
-          const { status, data: message } = err.response
-          this.$message.error(`${status} ${message}`)
-        })
+      this.fieldErr = {}
+      this.$http.post('/api/auth/register', postData)
+        .then(this.onSuccess)
+        .catch(this.onError)
         .finally(() => {
           this.btnLoading = false
         })
+    },
+    onSuccess (res) {
+      const { data } = res
+      this.$message.success('注册成功')
+      localStorage.setItem('email', data.email)
+      this.$router.replace('/')
+    },
+    onError (err) {
+      console.warn(err.response)
+      const { status, data } = err.response
+      let message = ''
+      switch (status) {
+        case 500: message = '服务器出错啦'; break
+        case 400:
+          if (data.type === 'field_exist') {
+            this.fieldErr[data.field] = data.message
+          }
+          message = data.message
+          break
+      }
+      this.$message.error({
+        message: `🙄 ${message}`,
+        iconClass: 'none',
+        customClass: 'el-message--error',
+      })
     },
   },
 }

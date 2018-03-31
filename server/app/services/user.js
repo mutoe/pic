@@ -21,7 +21,7 @@ const userServs = {
           return Promise.reject({
             code: 400,
             msg: `${key} 已存在`,
-            payload: { type: 'field_exist', content: key },
+            payload: { type: 'field_exist', field: key },
           })
         })
     })
@@ -33,23 +33,11 @@ const userServs = {
         // 字段过滤
         const { email, password, username } = fields
         return userModel.create({ email, password, username })
+          .catch(err => Promise.reject({ code: 500, msg: '数据写入失败', payload: { err } }))
       })
       // 如果用户创建成功, resove 掉本次业务逻辑
       .then(user => Promise.resolve(user))
       // 捕获以上所有错误
-      .catch(err => Promise.reject({ code: 500, msg: '数据写入失败', payload: err }))
-  },
-
-  /**
-   * 用户登陆业务
-   * @param {{email: String, password: String}} fields 用户名和密码
-   */
-  async login (fields) {
-    const { email, password } = fields
-
-    // 检查密码是否匹配
-    return userServs.cryptoCheck(email, password)
-      .then(() => Promise.resolve({ code: 200, payload: { email } }))
       .catch(err => Promise.reject(err))
   },
 
@@ -73,7 +61,7 @@ const userServs = {
         const cryptoPassword = crypto.createHash('sha1').update(password).digest('hex')
 
         // 与数据库保存的 sha1 摘要比对
-        if (user.password === cryptoPassword) return Promise.resolve()
+        if (user.password === cryptoPassword) return Promise.resolve(user)
 
         // 不匹配就交给 catch 返回上游
         return Promise.reject({ code: 400, msg: '用户密码不匹配', payload: { email } })

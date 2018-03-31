@@ -11,7 +11,7 @@ const authCtrl = {
 
     const result = userServs.create(fields)
       .then(userInfo => {
-        return Promise.resolve({ code: 201, payload: { user_id: userInfo.user_id } })
+        return Promise.resolve({ code: 201, payload: { email: userInfo.email } })
       })
       .catch(err => {
         if (err.code) return Promise.reject(err)
