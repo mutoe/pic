@@ -30,7 +30,14 @@ const authCtrl = {
     const fields = _.pick(ctx.request.body, ['email', 'password'])
     if (Object.keys(fields).length !== 2) ctx.throw({ code: 400, msg: '参数错误' })
 
-    const result = userServs.login(fields)
+    // 检查密码是否匹配
+    const { email, password } = fields
+    const result = userServs.cryptoCheck(email, password)
+      .then(user => {
+        return Promise.resolve({ code: 200, payload: { email } })
+      })
+      .catch(err => Promise.reject(err))
+
     await result
       .then(res => ctx.throw(res))
       .catch(err => ctx.throw(err))

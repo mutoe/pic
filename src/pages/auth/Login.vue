@@ -16,7 +16,7 @@
             el-checkbox(v-model='formLogin.remember') 记住我 #[small 请不要再公用电脑勾选此选项]
 
           el-form-item.buttons
-            el-button.btn-login(type='primary', @click='onSubmit') 登 陆
+            el-button.btn-login(type='primary', @click='onSubmit', :loading='btnLoading') 登 陆
             el-button(type='text', @click=`$router.push({ name: 'Register' })`) 去注册
             //- el-button(type='text', @click=`$router.push({ name: 'ResetPassword' })`) 忘记密码 ?
 
@@ -32,23 +32,54 @@ export default {
   data () {
     return {
       formLogin: {
-        email: '',
-        password: '',
+        email: 'testuser@mutoe.com',
+        password: '123456',
         remember: false,
       },
       rules: { email, password },
+      btnLoading: false,
     }
   },
   methods: {
     onSubmit () {
-      console.log(this.formLogin)
-
-      // validate 方法返回一个 Promise 对象
-      let valid = this.$refs['formLogin'].validate()
-      valid.then(() => {
-        // post data
-        this.$message('数据验证通过, 准备 post')
-      }).catch(e => e)
+      this.$refs['formLogin'].validate(valid => {
+        if (!valid) return
+        const postData = Object.assign({}, this.formLogin)
+        this.postForm(postData)
+      })
+    },
+    postForm (postData) {
+      this.btnLoading = true
+      this.$http.post('/api/auth/login', postData)
+        .then(this.onSuccess)
+        .catch(this.onError)
+        .finally(() => {
+          this.btnLoading = false
+        })
+    },
+    onSuccess (res) {
+      const { data } = res
+      localStorage.setItem('email', data.email)
+      this.$router.replace('/')
+      this.$message.success({
+        message: `😙 登陆成功`,
+        iconClass: 'none',
+        customClass: 'el-message--success',
+      })
+    },
+    onError (err) {
+      console.warn(err.response)
+      const { status, data } = err.response
+      let message = ''
+      switch (status) {
+        case 500: message = '服务器出错啦'; break
+        case 400: message = data.message; break
+      }
+      this.$message.error({
+        message: `🙄 ${message}`,
+        iconClass: 'none',
+        customClass: 'el-message--error',
+      })
     },
   },
 }
