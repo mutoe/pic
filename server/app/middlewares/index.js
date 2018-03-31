@@ -32,6 +32,9 @@ module.exports = app => {
           message: err.message,
           stack: err.stack,
         }
+        if (process.env.NODE_ENV !== 'production') {
+          ctx.body.stack = err.stack
+        }
       }
     }
   })

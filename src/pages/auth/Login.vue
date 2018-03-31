@@ -60,6 +60,7 @@ export default {
     onSuccess (res) {
       const { data } = res
       localStorage.setItem('email', data.email)
+      this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + data.token
       this.$router.replace('/')
       this.$message.success({
         message: `😙 登陆成功`,

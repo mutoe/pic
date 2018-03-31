@@ -1,4 +1,6 @@
 const _ = require('lodash/core')
+const jwt = require('jsonwebtoken')
+const config = require('../../config')
 const userServs = require('../services/user')
 
 const authCtrl = {
@@ -10,8 +12,12 @@ const authCtrl = {
     if (Object.keys(fields).length !== 3) return Promise.reject({ code: 400, msg: '参数错误' })
 
     const result = userServs.create(fields)
-      .then(userInfo => {
-        return Promise.resolve({ code: 201, payload: { email: userInfo.email } })
+      .then(user => {
+        // 签发 JSON Web Token 用于保存登录状态
+        const userToken = { id: user._id, email: user.email }
+        const token = jwt.sign(userToken, config.jwt.secret, { expiresIn: '24h' })
+
+        return Promise.resolve({ code: 201, payload: { email: user.email, token } })
       })
       .catch(err => {
         if (err.code) return Promise.reject(err)
@@ -34,7 +40,11 @@ const authCtrl = {
     const { email, password } = fields
     const result = userServs.cryptoCheck(email, password)
       .then(user => {
-        return Promise.resolve({ code: 200, payload: { email } })
+        // 签发 JSON Web Token 用于保存登录状态
+        const userToken = { id: user._id, email: user.email }
+        const token = jwt.sign(userToken, config.jwt.secret, { expiresIn: '24h' })
+
+        return Promise.resolve({ code: 200, payload: { email, token } })
       })
       .catch(err => Promise.reject(err))
 
