@@ -7,6 +7,6 @@ const router = new Router()
 router.post('/register', authCtrl.register)
 
 // 登陆
-router.get('/user/:user_id', authCtrl.login)
+router.post('/login', authCtrl.login)
 
 module.exports = router

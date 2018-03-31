@@ -28,6 +28,13 @@ yarn test
 yarn build
 ```
 
+### Pre-launch preparation 上线前准备
+
+#### History 模式
+
+前端路由使用了 history 模式, 所以需要在服务器中进行相关配置 ( 或者关掉它 ), 参考  
+https://router.vuejs.org/zh-cn/essentials/history-mode.html
+
 ## Related Links
 
 ### Validator
