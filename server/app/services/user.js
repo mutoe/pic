@@ -47,8 +47,9 @@ const userServs = {
   async login (fields) {
     const { email, password } = fields
 
+    // 检查密码是否匹配
     return userServs.cryptoCheck(email, password)
-      .then(() => Promise.resolve({ code: 200 }))
+      .then(() => Promise.resolve({ code: 200, payload: { email } }))
       .catch(err => Promise.reject(err))
   },
 
@@ -58,15 +59,24 @@ const userServs = {
    * @param {String} password 待校验原始密码
    */
   async cryptoCheck (email, password) {
+    // 尝试寻找指定 email 的用户
     return userModel.findOne({ email })
       .then(user => {
+        // 如果找到这个用户 交给下一个 then 处理
         if (user) return Promise.resolve(user)
+
+        // 找不到就交给 catch 返回上游
         return Promise.reject({ code: 400, msg: '该邮箱不存在', payload: { email } })
       })
       .then(user => {
+        // 将用户输入的密码进行 sha1 加密
         const cryptoPassword = crypto.createHash('sha1').update(password).digest('hex')
+
+        // 与数据库保存的 sha1 摘要比对
         if (user.password === cryptoPassword) return Promise.resolve()
-        else return Promise.reject({ code: 400, msg: '用户密码不匹配', payload: { email } })
+
+        // 不匹配就交给 catch 返回上游
+        return Promise.reject({ code: 400, msg: '用户密码不匹配', payload: { email } })
       })
       .catch(err => Promise.reject(err))
   },
