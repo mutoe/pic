@@ -60,6 +60,7 @@ export default {
     onSuccess (res) {
       const { data } = res
       localStorage.setItem('email', data.email)
+      localStorage.setItem('JWToken', data.token)
       this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + data.token
       this.$router.replace('/')
       this.$message.success({

@@ -13,8 +13,9 @@ header(:class='page')
         a.noline(href='#') 分类
 
       div.right
-        router-link.noline(:to=`{ name: 'Register' }`) 注册
-        router-link.noline(:to=`{ name: 'Login' }` ) 登录
+        router-link.noline(:to=`{ name: 'Register' }`, v-if='!JWToken') 注册
+        router-link.noline(:to=`{ name: 'Login' }`, v-if='!JWToken' ) 登录
+        a.noline(href='javascript:;', @click='onLogout', v-if='JWToken') 注销
         a.noline.danger(href='#') 贴图
 
 </template>
@@ -25,7 +26,17 @@ export default {
   props: {
     page: { type: String, default: '' },
   },
-  data: () => ({}),
+  computed: {
+    JWToken () { return this.localStorage.getItem('JWToken') },
+  },
+  methods: {
+    onLogout () {
+      this.$confirm('确认要退出登录吗 😒', '退出登录').then(() => {
+        localStorage.setItem('JWToken', '')
+        this.$message.success('注销成功 哼!')
+      }).catch(e => e)
+    },
+  },
 }
 </script>
 

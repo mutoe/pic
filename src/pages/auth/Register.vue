@@ -77,6 +77,7 @@ export default {
       const { data } = res
       this.$message.success('注册成功')
       localStorage.setItem('email', data.email)
+      localStorage.setItem('JWToken', data.token)
       this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + data.token
       this.$router.replace('/')
     },
