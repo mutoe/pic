@@ -7,6 +7,7 @@ import AuthRouter from './auth'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
 
     // Home 模块
