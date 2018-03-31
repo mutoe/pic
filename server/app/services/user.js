@@ -1,3 +1,4 @@
+const crypto = require('crypto')
 const userModel = require('../models/user')
 
 const userServs = {
@@ -63,7 +64,8 @@ const userServs = {
         return Promise.reject({ code: 400, msg: '该邮箱不存在', payload: { email } })
       })
       .then(user => {
-        if (user.password === password) return Promise.resolve()
+        const cryptoPassword = crypto.createHash('sha1').update(password).digest('hex')
+        if (user.password === cryptoPassword) return Promise.resolve()
         else return Promise.reject({ code: 400, msg: '用户密码不匹配', payload: { email } })
       })
       .catch(err => Promise.reject(err))
