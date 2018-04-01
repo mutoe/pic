@@ -5,6 +5,7 @@ import axios from 'axios'
 
 import App from '@/App'
 import router from '@/router'
+import store from '@/store'
 
 // ElementUI 组件
 import EleUI from '@/theme/components'
@@ -25,6 +26,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>',
 })
