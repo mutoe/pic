@@ -5,7 +5,7 @@ import store from '@/store'
 
 import HomeRouter from './home'
 import AuthRouter from './auth'
-import PicRouter from './pic'
+import ImageRouter from './image'
 
 Vue.use(Router)
 
@@ -20,7 +20,7 @@ const router = new Router({
     ...AuthRouter,
 
     // Pic 模块
-    ...PicRouter,
+    ...ImageRouter,
 
     // 没有匹配到路由时返回首页
     { path: '*', redirect: '/' },
