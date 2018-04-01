@@ -3,7 +3,7 @@
  * 核心模块 图片单元
  */
 
-import ImageCreate from '@/pages/image/Create'
+import ImageCreate from '@/views/image/Create'
 
 export default [
 

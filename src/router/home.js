@@ -2,7 +2,7 @@
  * Home 模块
  */
 
-import Index from '@/pages/home/Index'
+import Index from '@/views/home/Index'
 
 export default [
 

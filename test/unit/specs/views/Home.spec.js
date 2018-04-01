@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Index from '@/pages/home/Index'
+import Index from '@/views/home/Index'
 
 describe('page home Index.vue', () => {
   it('should render correct contents', () => {
