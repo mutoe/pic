@@ -3,8 +3,8 @@
  * Auth 模块
  */
 
-import Login from '@/pages/auth/Login'
-import Register from '@/pages/auth/Register'
+import Login from '@/views/auth/Login'
+import Register from '@/views/auth/Register'
 
 export default [
 
