@@ -58,10 +58,9 @@ export default {
         })
     },
     onSuccess (res) {
-      const { data } = res
-      localStorage.setItem('email', data.email)
-      localStorage.setItem('JWToken', data.token)
-      this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + data.token
+      const { email, token } = res.data
+      this.$store.dispatch('Login', { email, token })
+      this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token
       this.$router.replace('/')
       this.$message.success({
         message: `😙 登陆成功`,

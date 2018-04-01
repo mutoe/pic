@@ -5,7 +5,7 @@ const config = require('./config')
 const middlewares = require('./app/middlewares')
 const router = require('./app/routes')
 
-mongoose.connect('mongodb://localhost/pic')
+mongoose.connect(`${config.mongoUri}`)
 
 // 创建应用实例
 const app = new Koa()

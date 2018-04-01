@@ -8,35 +8,40 @@ header(:class='page')
     .container
       div.left
         router-link.noline(:to=`{ name: 'Index' }`).logo
-          img(src="/static/images/logo_400x90.png", alt="时光·印象", title="返回首页")
+          img(src='/static/images/logo_400x90.png', alt="时光·印象", title="返回首页")
 
         a.noline(href='#') 分类
 
       div.right
-        router-link.noline(:to=`{ name: 'Register' }`, v-if='!JWToken') 注册
-        router-link.noline(:to=`{ name: 'Login' }`, v-if='!JWToken' ) 登录
-        a.noline(href='javascript:;', @click='onLogout', v-if='JWToken') 注销
-        a.noline.danger(href='#') 贴图
+        router-link.noline(:to=`{ name: 'Register' }`, v-if='!token') 注册
+        router-link.noline(:to=`{ name: 'Login' }`, v-if='!token' ) 登录
+        a.noline(href='javascript:;', @click='onLogout', v-if='token') 注销
+        a.noline.danger(href='#', v-if='token') 贴图
 
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Header',
   props: {
     page: { type: String, default: '' },
   },
-  data () {
-    return {
-      // TODO: 登陆状态使用 vuex + cookie 管理
-      JWToken: false,
-    }
+  computed: {
+    ...mapGetters({
+      token: 'token',
+    }),
   },
   methods: {
     onLogout () {
       this.$confirm('确认要退出登录吗 😒', '退出登录').then(() => {
-        localStorage.setItem('JWToken', '')
-        this.$message.success('注销成功 哼!')
+        this.$store.dispatch('Logout')
+        this.$message.success({
+          message: '😒 注销成功 哼!',
+          iconClass: 'none',
+          customClass: 'el-message--success',
+        })
       }).catch(e => e)
     },
   },

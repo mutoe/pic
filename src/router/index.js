@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import store from '@/store'
+
 import HomeRouter from './home'
 import AuthRouter from './auth'
 import PicRouter from './pic'
@@ -32,7 +34,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
-    const token = localStorage.getItem('JWToken')
+    const token = store.state.token
     if (token && token !== 'null') {
       Vue.prototype.$http.defaults.headers.common['Authorization'] = `Bearer ${token}`
       next()

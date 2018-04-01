@@ -74,11 +74,10 @@ export default {
         })
     },
     onSuccess (res) {
-      const { data } = res
+      const { token } = res.data
       this.$message.success('注册成功')
-      localStorage.setItem('email', data.email)
-      localStorage.setItem('JWToken', data.token)
-      this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + data.token
+      this.$store.dispatch('Login', { email, token })
+      this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + token
       this.$router.replace('/')
     },
     onError (err) {
