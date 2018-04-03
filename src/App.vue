@@ -67,6 +67,7 @@ body
     flex 1 0 auto
     overflow-x hidden
     transition all 0.3s
+    padding 0
 
 .child-view
   position relative

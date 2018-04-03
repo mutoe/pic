@@ -8,7 +8,7 @@ import ImageCreate from '@/views/image/Create'
 export default [
 
   {
-    path: '/image/add',
+    path: '/image/create',
     name: 'ImageCreate',
     component: ImageCreate,
     meta: {

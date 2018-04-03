@@ -1,4 +1,7 @@
 
+/**
+ * 重定义全局盒模型
+ */
 *
   box-sizing inherit
 
@@ -7,6 +10,10 @@ body
   color $color-text-primary
   font-size $font-size-base
 
+
+/**
+ * 自定义滚动条样式
+ */
 body
 div
   &::-webkit-scrollbar-track
@@ -23,12 +30,25 @@ div
     background-color #f56c6c
     -webkit-box-shadow inset 0 0 6px rgba(0, 0, 0, 0.3)
 
+/**
+ * 列表样式清空
+ */
 ul
   margin 0
   padding 0
   list-style none
 
+
+/**
+ * 容器
+ */
 .container
   margin 0 auto
   max-width 1200px
   width 100%
+
+/**
+ * 暗色容器
+ */
+.dark
+  color #fff
