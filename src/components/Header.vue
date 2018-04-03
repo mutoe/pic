@@ -16,7 +16,7 @@ header(:class='page')
         router-link.noline(:to=`{ name: 'Register' }`, v-if='!token') 注册
         router-link.noline(:to=`{ name: 'Login' }`, v-if='!token' ) 登录
         a.noline(href='javascript:;', @click='onLogout', v-if='token') 注销
-        a.noline.danger(href='#', v-if='token') 贴图
+        router-link.noline.danger(:to=`{ name: 'ImageCreate' }`, v-if='token' ) 贴图
 
 </template>
 
