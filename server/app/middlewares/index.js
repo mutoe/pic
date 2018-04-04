@@ -1,9 +1,9 @@
-const BodyParser = require('koa-bodyparser')
+const KoaBody = require('koa-body')
 const Logger = require('koa-logger')
 
 module.exports = app => {
   // body parser
-  app.use(BodyParser())
+  app.use(KoaBody())
 
   /* istanbul ignore if: logger not running in the test env */
   if (process.env.NODE_ENV !== 'test') {
