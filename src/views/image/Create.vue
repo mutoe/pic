@@ -5,10 +5,8 @@
     el-upload.upload(drag, multiple
         :action='url'
         :list-type='listType'
-        :file-list='list'
-        :on-preview='handlePictureCardPreview'
-        :on-change='onChange'
-        :on-remove='onChange')
+        :file-list.sync='list'
+        :on-preview='handlePictureCardPreview')
       i.el-icon-upload
 
     .el-upload__text
@@ -36,12 +34,13 @@
             li 含有露骨、诱惑、教唆等内容的图片或文字.
             li 散布谣言、广告、诽谤等内容的图片或文字.
           | 违反作品投稿利用规则的用户，将会被停止投稿作品公开，停止账号使用。 #[br]
-          | TimeImage 使⽤条款 #[br]
+          //- | TimeImage 使⽤条款 #[br]
 
         el-form-item(size='large', style='text-align: center;')
           el-button.submit(type='primary') 投 稿
 
   el-dialog(:visible.sync='dialogVisible')
+    template(slot='title') {{ dialogTitle }}
     img(alt='', :src='dialogImageUrl')
 
 </template>
@@ -63,12 +62,9 @@ export default {
     }
   },
   methods: {
-    onChange (file, fileList) {
-      console.log(fileList, file)
-      this.list = fileList
-    },
     handlePictureCardPreview (file) {
       this.dialogImageUrl = file.url
+      this.dialogTitle = file.name
       this.dialogVisible = true
     },
   },
