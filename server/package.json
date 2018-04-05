@@ -11,6 +11,7 @@
     "dev": "pm2-dev index.js --timestamp"
   },
   "dependencies": {
+    "busboy": "^0.2.14",
     "koa": "^2.5.0",
     "koa-body": "^2.5.0",
     "koa-jwt": "^3.3.1",

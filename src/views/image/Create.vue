@@ -3,10 +3,14 @@
 .page.image.create
   section.upload-wrap.dark
     el-upload.upload(drag, multiple
-        :action='url'
-        :list-type='listType'
-        :file-list.sync='list'
-        :on-preview='handlePictureCardPreview')
+        :action='upload.url'
+        :headers='upload.headers'
+        :list-type='upload.listType'
+        :file-list='upload.list'
+        :on-change='onUploadChange'
+        :on-preview='handlePictureCardPreview'
+        :on-success='onUploadSuccess'
+        :on-error='onUploadError')
       i.el-icon-upload
 
     .el-upload__text
@@ -39,9 +43,9 @@
         el-form-item(size='large', style='text-align: center;')
           el-button.submit(type='primary') 投 稿
 
-  el-dialog(:visible.sync='dialogVisible')
-    template(slot='title') {{ dialogTitle }}
-    img(alt='', :src='dialogImageUrl')
+  el-dialog(:visible.sync='dialog.visible')
+    template(slot='title') {{ dialog.title }}
+    img(alt='', :src='dialog.imageUrl')
 
 </template>
 
@@ -49,11 +53,19 @@
 export default {
   data () {
     return {
-      list: [],
-      listType: 'picture-card',
-      url: 'https://jsonplaceholder.typicode.com/posts/',
-      dialogImageUrl: '',
-      dialogVisible: false,
+      upload: {
+        url: '/api/image/upload',
+        headers: {
+          'Authorization': `Bearer ${this.$store.getters.token}`,
+        },
+        list: [],
+        listType: 'picture-card',
+      },
+      dialog: {
+        imageUrl: '',
+        title: '',
+        visible: false,
+      },
       form: {
         title: '',
         description: '',
@@ -62,10 +74,21 @@ export default {
     }
   },
   methods: {
+    onUploadChange (file, fileList) {
+      this.upload.list = fileList
+    },
     handlePictureCardPreview (file) {
-      this.dialogImageUrl = file.url
-      this.dialogTitle = file.name
-      this.dialogVisible = true
+      this.dialog.imageUrl = file.url
+      this.dialog.title = file.name
+      this.dialog.visible = true
+    },
+    onUploadSuccess (res, file, fileList) {
+      file.filename = res.filename
+      console.log(this.upload.list)
+    },
+    onUploadError (err, file, fileist) {
+      console.warn(err)
+      this.$message.error('出错了')
     },
   },
 }
@@ -145,5 +168,10 @@ export default {
     > .el-form-item__content
       line-height 1.8
       font-size .8em
+
+  .el-upload-list--picture-card
+    .el-upload-list__item-thumbnail
+      width auto
+      height auto
 
 </style>
