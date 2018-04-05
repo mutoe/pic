@@ -3,12 +3,14 @@
 .page.image.create
   section.upload-wrap.dark
     el-upload.upload(drag, multiple
-        :action='url'
-        :list-type='listType'
-        :file-list='list'
+        :action='upload.url'
+        :headers='upload.headers'
+        :list-type='upload.listType'
+        :file-list='upload.list'
+        :on-change='onUploadChange'
         :on-preview='handlePictureCardPreview'
-        :on-change='onChange'
-        :on-remove='onChange')
+        :on-success='onUploadSuccess'
+        :on-error='onUploadError')
       i.el-icon-upload
 
     .el-upload__text
@@ -26,8 +28,8 @@
           el-input(type='textarea', v-model='form.description', :autosize="{ minRows: 4}")
         el-form-item(label='公开范围')
           el-radio-group(v-model='form.scope', size='small')
-            el-radio-button(:label='0') 公开
-            el-radio-button(:label='1', disabled) 仅好友(尚未开放好友功能)
+            el-radio-button(label='all') 公开
+            el-radio-button(label='friends', disabled) 仅好友(尚未开放好友功能)
 
         el-form-item.declare
           | 以下作品禁止投稿。请在投稿之前进行确认
@@ -36,13 +38,14 @@
             li 含有露骨、诱惑、教唆等内容的图片或文字.
             li 散布谣言、广告、诽谤等内容的图片或文字.
           | 违反作品投稿利用规则的用户，将会被停止投稿作品公开，停止账号使用。 #[br]
-          | TimeImage 使⽤条款 #[br]
+          //- | TimeImage 使⽤条款 #[br]
 
         el-form-item(size='large', style='text-align: center;')
-          el-button.submit(type='primary') 投 稿
+          el-button.submit(type='primary', @click='submit') 投 稿
 
-  el-dialog(:visible.sync='dialogVisible')
-    img(alt='', :src='dialogImageUrl')
+  el-dialog(:visible.sync='dialog.visible')
+    template(slot='title') {{ dialog.title }}
+    img(:alt='dialog.title', :src='dialog.imageUrl')
 
 </template>
 
@@ -50,26 +53,56 @@
 export default {
   data () {
     return {
-      list: [],
-      listType: 'picture-card',
-      url: 'https://jsonplaceholder.typicode.com/posts/',
-      dialogImageUrl: '',
-      dialogVisible: false,
+      upload: {
+        url: '/api/image/upload',
+        headers: {
+          'Authorization': `Bearer ${this.$store.getters.token}`,
+        },
+        list: [],
+        listType: 'picture-card',
+      },
+      dialog: {
+        imageUrl: '',
+        title: '',
+        visible: false,
+      },
       form: {
         title: '',
         description: '',
-        scope: 0,
+        scope: 'all',
       },
     }
   },
   methods: {
-    onChange (file, fileList) {
-      console.log(fileList, file)
-      this.list = fileList
+    onUploadChange (file, fileList) {
+      this.upload.list = fileList
     },
     handlePictureCardPreview (file) {
-      this.dialogImageUrl = file.url
-      this.dialogVisible = true
+      this.dialog.imageUrl = file.url
+      this.dialog.title = file.name
+      this.dialog.visible = true
+    },
+    onUploadSuccess (res, file, fileList) {
+      file.filename = res.filename
+    },
+    onUploadError (err, file, fileist) {
+      console.warn(err)
+      this.$message.error('出错了')
+    },
+    submit () {
+      if (this.upload.list.length === 0) return this.$message.error('请至少上传一张图片')
+      const postData = Object.assign({}, this.form, { list: this.upload.list })
+      this.$http.post('/api/image', postData)
+        .then(this.onSubmitSuccess)
+        .catch(this.onSubmitError)
+    },
+    onSubmitSuccess (res) {
+      const { image } = res.data
+      this.$message.success(`创建成功, id是 ${image._id}`)
+      console.log(res)
+    },
+    onSubmitError (err) {
+      console.warn(err)
     },
   },
 }
@@ -149,5 +182,10 @@ export default {
     > .el-form-item__content
       line-height 1.8
       font-size .8em
+
+  .el-upload-list--picture-card
+    .el-upload-list__item-thumbnail
+      width auto
+      height auto
 
 </style>

@@ -25,11 +25,13 @@ const store = new Vuex.Store({
   actions: {
     Login ({ commit }, user) {
       commit('SET_TOKEN', user.token)
+      Vue.prototype.$http.defaults.headers.common['Authorization'] = `Bearer ${user.token}`
       setToken(user.token)
     },
 
     Logout ({ commit }) {
       commit('SET_TOKEN', '')
+      Vue.prototype.$http.defaults.headers.common['Authorization'] = null
       removeToken()
     },
   },

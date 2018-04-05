@@ -33,18 +33,17 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  const token = store.getters.token
+  if (token && token !== 'null') {
+    Vue.prototype.$http.defaults.headers.common['Authorization'] = `Bearer ${token}`
+  }
   if (to.meta.requireAuth) {
-    const token = store.state.token
-    if (token && token !== 'null') {
-      Vue.prototype.$http.defaults.headers.common['Authorization'] = `Bearer ${token}`
-      next()
-    } else {
+    if (!token || token === 'null') {
       Vue.prototype.$message.warn('需要先登录哦~')
       next('/auth/login')
     }
-  } else {
-    next()
   }
+  next()
 })
 
 export default router
