@@ -28,8 +28,8 @@
           el-input(type='textarea', v-model='form.description', :autosize="{ minRows: 4}")
         el-form-item(label='公开范围')
           el-radio-group(v-model='form.scope', size='small')
-            el-radio-button(:label='0') 公开
-            el-radio-button(:label='1', disabled) 仅好友(尚未开放好友功能)
+            el-radio-button(label='all') 公开
+            el-radio-button(label='friends', disabled) 仅好友(尚未开放好友功能)
 
         el-form-item.declare
           | 以下作品禁止投稿。请在投稿之前进行确认
@@ -41,11 +41,11 @@
           //- | TimeImage 使⽤条款 #[br]
 
         el-form-item(size='large', style='text-align: center;')
-          el-button.submit(type='primary') 投 稿
+          el-button.submit(type='primary', @click='submit') 投 稿
 
   el-dialog(:visible.sync='dialog.visible')
     template(slot='title') {{ dialog.title }}
-    img(alt='', :src='dialog.imageUrl')
+    img(:alt='dialog.title', :src='dialog.imageUrl')
 
 </template>
 
@@ -69,7 +69,7 @@ export default {
       form: {
         title: '',
         description: '',
-        scope: 0,
+        scope: 'all',
       },
     }
   },
@@ -84,11 +84,25 @@ export default {
     },
     onUploadSuccess (res, file, fileList) {
       file.filename = res.filename
-      console.log(this.upload.list)
     },
     onUploadError (err, file, fileist) {
       console.warn(err)
       this.$message.error('出错了')
+    },
+    submit () {
+      if (this.upload.list.length === 0) return this.$message.error('请至少上传一张图片')
+      const postData = Object.assign({}, this.form, { list: this.upload.list })
+      this.$http.post('/api/image', postData)
+        .then(this.onSubmitSuccess)
+        .catch(this.onSubmitError)
+    },
+    onSubmitSuccess (res) {
+      const { image } = res.data
+      this.$message.success(`创建成功, id是 ${image._id}`)
+      console.log(res)
+    },
+    onSubmitError (err) {
+      console.warn(err)
     },
   },
 }
