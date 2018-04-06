@@ -5,7 +5,7 @@ const picRouter = require('./image')
 
 const router = new Router()
 
-router.prefix('/api')
+// router.prefix('/api')
 
 // 挂载路由
 router.use('/auth', authRouter.routes())

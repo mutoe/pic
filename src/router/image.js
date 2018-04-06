@@ -4,6 +4,7 @@
  */
 
 import ImageCreate from '@/views/image/Create'
+import ImageRead from '@/views/image/Read'
 
 export default [
 
@@ -14,6 +15,12 @@ export default [
     meta: {
       retuireAuth: true,
     },
+  },
+
+  {
+    path: '/image/:id',
+    name: 'ImageRead',
+    component: ImageRead,
   },
 
 ]

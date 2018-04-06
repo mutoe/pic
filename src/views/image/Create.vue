@@ -98,8 +98,10 @@ export default {
     },
     onSubmitSuccess (res) {
       const { image } = res.data
-      this.$message.success(`创建成功, id是 ${image._id}`)
-      console.log(res)
+      this.$message.success(`创建成功, 即将跳转...`)
+      setTimeout(() => {
+        this.$router.push({ name: 'ImageRead', params: { id: image._id } })
+      }, 1200)
     },
     onSubmitError (err) {
       console.warn(err)

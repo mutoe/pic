@@ -61,6 +61,13 @@ header
   &.index
     height 720px
 
+  &.imageread
+    height 60px
+
+    .topic
+    .blur
+      background-image none
+
 .nav
   height $nav-height
   background rgba(#fff, 0)

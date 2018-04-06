@@ -1,4 +1,5 @@
-const { uploadFile } = require('../utils/upload')
+const path = require('path')
+const upload = require('../utils/upload')
 const config = require('../../config')
 const imageServs = require('../services/image')
 
@@ -12,7 +13,7 @@ const imageCtrl = {
       fileType: 'tmp',
       path: config.uploadPath,
     }
-    const { success, error, filename } = await uploadFile(ctx, options)
+    const { success, error, filename } = await upload.uploadFile(ctx, options)
 
     if (success) ctx.throw({ code: 201, payload: { filename } })
 
@@ -30,16 +31,42 @@ const imageCtrl = {
 
     const user = ctx.state.user
     const result = imageServs.create(user, fields)
+      // 创建成功后将文件从临时目录移入归档目录
+      .then(image => moveFiles(image))
       .then(image => Promise.resolve({ code: 201, payload: { image } }))
       .catch(err => Promise.reject(err))
 
     await result
       .then(res => ctx.throw(res))
       .catch(err => ctx.throw(err))
-
-    // TODO: 移动图片文件
-
   },
+
+  async read (ctx, next) {
+    const imageId = ctx.params.id
+
+    const result = imageServs.read(imageId)
+      .then(image => Promise.resolve({ code: 200, payload: { image } }))
+
+    await result
+      .then(res => ctx.throw(res))
+      .catch(err => ctx.throw(err))
+  },
+}
+
+/**
+ * 创建成功后移动文件
+ */
+async function moveFiles (image) {
+  const promises = []
+  for (let file of image.list) {
+    const oldPath = path.join(config.uploadPath, 'tmp', file.filename)
+    const newPath = path.join(config.uploadPath, 'images', file.filename)
+    const promise = upload.moveFile(oldPath, newPath)
+    promises.push(promise)
+  }
+  return Promise.all(promises)
+    .then(() => Promise.resolve(image))
+    .catch(err => Promise.reject(err))
 }
 
 module.exports = imageCtrl
