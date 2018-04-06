@@ -11,6 +11,7 @@
         .image-card(:class=`{ multi: detail.list.length > 1 }`)
           .image(:style='{backgroundImage: "url(/uploads/images/" + detail.list[0].filename + ")"}')
         img.placeholder(:src='"/uploads/images/" + detail.list[0].filename')
+      .loading(v-else, v-loading='true')
 
       .description {{ detail.description }}
 
@@ -59,6 +60,10 @@ export default {
     margin-left $sm
     color $color-text-disabled
     font-size $font-size-large
+
+.loading
+  width 100%
+  height 70vh
 
 .detail
   .image-wrap
