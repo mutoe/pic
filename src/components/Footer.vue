@@ -1,6 +1,6 @@
 <template lang="pug">
 
-footer.dark
+footer.dark(:class='page')
   .container
     div
       img.logo(src='/static/images/logo_white.png')
@@ -25,6 +25,9 @@ let dialogHtml = `
 
 export default {
   name: 'Footer',
+  props: {
+    page: { type: String, default: '' },
+  },
   methods: {
     onMoreClick () {
       this.$msgbox({
@@ -43,18 +46,30 @@ export default {
 
 <style lang="stylus" scoped>
 
-$footer-height = 300px
+$footer-height = 140px
 
 footer
   height $footer-height
   background-color $color-background-dark
   color $color-white
+  transition .4s
+
+  &.index
+    height 300px
+
+    .container
+      flex-direction column
+      justify-content center
+
+    .copyright
+      align-items center
+      flex-grow 0
 
 .container
   height 100%
   display flex
-  flex-direction column
-  justify-content center
+  flex-direction row
+  justify-content space-around
   align-items center
 
 .logo
@@ -62,9 +77,10 @@ footer
 
 ul.copyright
   display flex
-  margin-top 48px
   flex-direction column
   justify-content center
+  align-items flex-start
+  flex-grow .6
 
   li
     margin 8px 0

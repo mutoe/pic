@@ -8,7 +8,7 @@
       transition(:name='transitionName', mode='out-in')
         router-view.child-view
 
-    v-footer
+    v-footer(:page='page')
 
 </template>
 
