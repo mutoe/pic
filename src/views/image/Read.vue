@@ -67,7 +67,7 @@ export default {
     justify-content center
     margin $lg auto 0
     cursor pointer
-    width fit-content
+    width 100%
 
     thumb-border()
       border-radius 4px
@@ -75,10 +75,12 @@ export default {
       box-shadow 0 0 $sm rgba(#000, .2)
       background #fff
 
-    .placeholder
+    img.placeholder
       visibility hidden
       max-width 98vw
       max-height 98vh
+      width 100%
+      height @width
 
     .image-card
       // visibility hidden
