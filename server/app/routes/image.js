@@ -12,4 +12,6 @@ router.post('/', jwt({ secret: config.jwt.secret }), imageCtrl.create)
 
 router.get('/:id', imageCtrl.read)
 
+router.get('/', imageCtrl.fetchAll)
+
 module.exports = router

@@ -47,7 +47,7 @@ import {
   Upload,
   // Progress,
   // Badge,
-  // Card,
+  Card,
   // Rate,
   // Steps,
   // Step,
@@ -95,6 +95,7 @@ export default {
     RadioButton,
     Carousel,
     CarouselItem,
+    Card,
     Loading.directive,
   ],
   proto: {
