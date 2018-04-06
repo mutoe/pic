@@ -40,6 +40,17 @@ const imageCtrl = {
       .then(res => ctx.throw(res))
       .catch(err => ctx.throw(err))
   },
+
+  async read (ctx, next) {
+    const imageId = ctx.params.id
+
+    const result = imageServs.read(imageId)
+      .then(image => Promise.resolve({ code: 200, payload: { image } }))
+
+    await result
+      .then(res => ctx.throw(res))
+      .catch(err => ctx.throw(err))
+  },
 }
 
 /**
