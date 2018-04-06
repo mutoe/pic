@@ -51,6 +51,16 @@ const imageCtrl = {
       .then(res => ctx.throw(res))
       .catch(err => ctx.throw(err))
   },
+
+  async fetchAll (ctx, next) {
+    const result = imageServs.fetch()
+      .then(images => Promise.resolve({ code: 200, payload: { images } }))
+
+    await result
+      .then(res => ctx.throw(res))
+      .catch(err => ctx.throw(err))
+  },
+
 }
 
 /**
