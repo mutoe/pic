@@ -1,6 +1,10 @@
 <template lang="pug">
 
-.page {{ imageId }}
+.page # {{ imageId }}
+  ul
+    li(v-for='image in detail.list')
+      p {{ image }}
+      img(:src='"/uploads/images/" + image.filename')
 
 </template>
 
@@ -9,7 +13,7 @@ export default {
   data () {
     return {
       imageId: this.$route.params.id,
-      image: {},
+      detail: {},
     }
   },
   created () {
@@ -19,7 +23,7 @@ export default {
     fetchInfo () {
       this.$http.get(`/api/image/${this.imageId}`)
         .then(res => {
-          this.image = res.data.image
+          this.detail = res.data.image
         })
         .catch(err => console.warn(err))
     },

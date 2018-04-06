@@ -1,4 +1,6 @@
 const Koa = require('koa')
+const mount = require('koa-mount')
+const serve = require('koa-static')
 const mongoose = require('mongoose')
 
 const config = require('./config')
@@ -7,14 +9,19 @@ const router = require('./app/routes')
 
 mongoose.connect(`${config.mongoUri}`)
 
-// 创建应用实例
+// 创建接口实例
+const api = new Koa()
+middlewares(api)
+api.use(router.routes())
+
+// 创建静态服务实例
+const uploads = new Koa()
+uploads.use(serve('uploads'))
+
+// 挂载实例
 const app = new Koa()
-
-// 挂载中间件
-middlewares(app)
-
-// 挂载路由
-app.use(router.routes())
+app.use(mount('/api', api))
+app.use(mount('/uploads', uploads))
 
 /* istanbul ignore if */
 if (process.env.NODE_ENV !== 'test') {
