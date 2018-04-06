@@ -2,13 +2,15 @@
 
 .page.image.read
   el-row.container(type='flex', justify='center')
-    el-col.detail(:span='24')
-      h1
+    el-col.detail(:md='24', :lg='18')
+      h1.title
         | {{ detail.title }}
         small.info-id.hidden-sm-and-down \#{{ imageId }}
 
-      .image-wrap(v-if='detail.list.length', :class=`{ multi: detail.list.length > 1 }`, @click='lightboxVisible = true')
-        img.image(:src='"/uploads/images/" + detail.list[0].filename')
+      .image-wrap(v-if='detail.list.length', @click='lightboxVisible = true')
+        .image-card(:class=`{ multi: detail.list.length > 1 }`)
+          .image(:style='{backgroundImage: "url(/uploads/images/" + detail.list[0].filename + ")"}')
+        img.placeholder(:src='"/uploads/images/" + detail.list[0].filename')
 
       .description {{ detail.description }}
 
@@ -50,16 +52,22 @@ export default {
 
 <style lang="stylus" scoped>
 
-.info-id
-  margin-left $sm
-  color $color-text-placeholder
+.title
+  text-align center
+
+  .info-id
+    margin-left $sm
+    color $color-text-disabled
+    font-size $font-size-large
 
 .detail
   .image-wrap
+    position relative
     display flex
     justify-content center
-    margin-top $lg
+    margin $lg auto 0
     cursor pointer
+    width fit-content
 
     thumb-border()
       border-radius 4px
@@ -67,32 +75,44 @@ export default {
       box-shadow 0 0 $sm rgba(#000, .2)
       background #fff
 
-    .image
-      z-index 1
+    .placeholder
+      visibility hidden
       max-width 98vw
-      width 120%
-      height @width
+      max-height 98vh
+
+    .image-card
+      // visibility hidden
+      position absolute
+      top 0
+      left 0
+      bottom 0
+      right 0
       thumb-border()
 
-    &.multi
-      position relative
+      .image
+        background center no-repeat
+        background-size cover
+        width 100%
+        height 100%
 
-      &::before
-      &::after
-        content ''
-        position absolute
-        z-index -1
-        top 0
-        bottom 0
-        left -10%
-        width 120%
-        thumb-border()
+      &.multi
 
-      &::before
-        transform rotateZ(1deg)
+        &::before
+        &::after
+          content ''
+          position absolute
+          z-index -1
+          top 0
+          bottom 0
+          left 0
+          right 0
+          thumb-border()
 
-      &::after
-        transform rotateZ(-1deg)
+        &::before
+          transform rotateZ(2deg)
+
+        &::after
+          transform rotateZ(-1deg)
 
   .description
     font-size $font-size-middle
