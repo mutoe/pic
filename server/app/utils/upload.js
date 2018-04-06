@@ -112,6 +112,7 @@ async function deleteFile (filePath) {
 async function moveFile (from, to) {
   return new Promise((resolve, reject) => {
     fs.rename(from, to, (err) => {
+      mkdirsSync(path.dirname(to))
       if (err) return reject(err)
       resolve()
     })
