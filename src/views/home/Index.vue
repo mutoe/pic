@@ -50,3 +50,11 @@ export default {
   cursor pointer
 
 </style>
+
+<style lang="stylus">
+
+.el-card__body
+  display flex
+  justify-content center
+
+</style>
