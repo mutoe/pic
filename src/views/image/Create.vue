@@ -3,10 +3,13 @@
 .page.image.create
   section.upload-wrap.dark
     el-upload.upload(drag, multiple
-        :action='upload.url'
-        :headers='upload.headers'
+        accept='image/*'
+        :action='oss.host'
+        :data='oss'
+        :limit='upload.limit'
         :list-type='upload.listType'
         :file-list='upload.list'
+        :before-upload='beforeUpload'
         :on-change='onUploadChange'
         :on-preview='handlePictureCardPreview'
         :on-success='onUploadSuccess'
@@ -16,7 +19,7 @@
     .el-upload__text
       | 将文件拖到方框内，或点击方框上传 #[br]
       | 每张图片最大 8M，支持 JPEG GIF PNG #[br]
-      | 每次最多上传 100 张, 共 30M 以下 #[br]
+      | 每次最多上传 {{ upload.limit }} 张, 共 30M 以下 #[br]
 
   el-row(type='flex', justify='center')
     el-col.form-wrap(:xl='8', :lg='10', :md='16')
@@ -53,11 +56,19 @@
 export default {
   data () {
     return {
+      oss: {
+        key: '',
+        dirPath: '',
+        OSSAccessKeyId: '',
+        policy: '',
+        Signature: '',
+        host: '',
+        success_action_status: 200,
+        callback: '',
+      },
       upload: {
-        url: '/api/image/upload',
-        headers: {
-          'Authorization': `Bearer ${this.$store.getters.token}`,
-        },
+        accept: '',
+        limit: 100,
         list: [],
         listType: 'picture-card',
       },
@@ -73,28 +84,66 @@ export default {
       },
     }
   },
+  mounted () {
+    // 请求 oss 签名
+    this.ossSign()
+  },
   methods: {
-    onUploadChange (file, fileList) {
-      this.upload.list = fileList
+    // 请求 oss 签名
+    ossSign () {
+      this.$http.get('/api/auth/ossSign')
+        .then(res => Object.assign(this.oss, res.data))
+        .catch(this.onError)
     },
-    handlePictureCardPreview (file) {
-      this.dialog.imageUrl = file.url
-      this.dialog.title = file.name
-      this.dialog.visible = true
+
+    // 上传前检查
+    beforeUpload (file) {
+      if (file.type.split('/')[0] !== 'image') {
+        this.$message.error('文件类型错误')
+        return false
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        this.$message.error('单个文件超过 8 M')
+        return false
+      }
+
+      // 生成文件名
+      const fileExt = file.name.split('.').pop()
+      const randomString = (new Date().getTime() + Math.random()).toString(36).replace(/\./, '')
+
+      this.oss.key = this.oss.dirPath + randomString + '.' + fileExt
+      return true
     },
+
     onUploadSuccess (res, file, fileList) {
-      file.filename = res.filename
+      const filePath = res.result.filename
+      file.path = filePath
+      file.filename = filePath.split('/').pop()
     },
     onUploadError (err, file, fileist) {
       console.warn(err)
       this.$message.error('出错了')
     },
+
+    // 更新文件列表
+    onUploadChange (file, fileList) {
+      this.upload.list = fileList
+    },
+
+    // 预览
+    handlePictureCardPreview (file) {
+      this.dialog.imageUrl = this.oss.host + file.path
+      this.dialog.title = file.name
+      this.dialog.visible = true
+    },
+
+    // 提交表单
     submit () {
       if (this.upload.list.length === 0) return this.$message.error('请至少上传一张图片')
       const postData = Object.assign({}, this.form, { list: this.upload.list })
       this.$http.post('/api/image', postData)
         .then(this.onSubmitSuccess)
-        .catch(this.onSubmitError)
+        .catch(this.onError)
     },
     onSubmitSuccess (res) {
       const { image } = res.data
@@ -103,7 +152,7 @@ export default {
         this.$router.push({ name: 'ImageRead', params: { id: image._id } })
       }, 1200)
     },
-    onSubmitError (err) {
+    onError (err) {
       console.warn(err)
     },
   },

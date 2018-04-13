@@ -9,4 +9,10 @@ router.post('/register', authCtrl.register)
 // 登陆
 router.post('/login', authCtrl.login)
 
+// OSS 授权
+router.get('/ossSign', authCtrl.ossSign)
+
+// OSS 回调
+router.post('/ossCallback', authCtrl.ossCallback)
+
 module.exports = router

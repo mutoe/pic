@@ -19,7 +19,7 @@ module.exports = app => {
     } catch (err) {
       ctx.set('x-powered-by', 'Koa2')
 
-      if (err.code) {
+      if (err.code && typeof err.code === 'number') {
         ctx.status = err.code
         ctx.body = {
           message: err.msg,
