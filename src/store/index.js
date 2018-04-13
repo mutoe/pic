@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import * as util from '@/utils/auth'
 
 Vue.use(Vuex)
 
@@ -12,7 +12,12 @@ const store = new Vuex.Store({
 
   state: {
     user: {
-      token: getToken(),
+      token: util.getToken(),
+    },
+    oss: {
+      uri: 'https://timeimage.oss-cn-shenzhen.aliyuncs.com/uploads/',
+      host: 'https://timeimage.oss-cn-shenzhen.aliyuncs.com/',
+      path: 'uploads/',
     },
   },
 
@@ -26,14 +31,15 @@ const store = new Vuex.Store({
     Login ({ commit }, user) {
       commit('SET_TOKEN', user.token)
       Vue.prototype.$http.defaults.headers.common['Authorization'] = `Bearer ${user.token}`
-      setToken(user.token)
+      util.setToken(user.token)
     },
 
     Logout ({ commit }) {
       commit('SET_TOKEN', '')
       Vue.prototype.$http.defaults.headers.common['Authorization'] = null
-      removeToken()
+      util.removeToken()
     },
+
   },
 })
 

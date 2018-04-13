@@ -35,6 +35,24 @@ yarn build
 前端路由使用了 history 模式, 所以需要在服务器中进行相关配置 ( 或者关掉它 ), 参考  
 https://router.vuejs.org/zh-cn/essentials/history-mode.html
 
+### OSS 授权配置
+
+文件保存使用了阿里 OSS 服务, 为了避免暴露 Secret, 所以将配置提取出来, 放在 `server/.env` 下, 内容如下
+
+``` ini
+# AliOSS Configuration
+OSS_URI = https://timeimage.oss-cn-shenzhen.aliyuncs.com
+OSS_DIR_PATH = uploads/
+OSS_KEY_ID = yourKeyId
+OSS_KEY_SECRET = yourKeySecret
+OSS_EXPIRE =
+OSS_MAX_SIZE =
+# callback
+OSS_CB_HOST = https://pic.mutoe.com
+OSS_CB_PORT =
+OSS_CB_PATH = /api/auth/ossCallback
+```
+
 ## Related Links
 
 ### Validator

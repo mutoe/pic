@@ -9,8 +9,8 @@
 
       .image-wrap(v-if='detail.list.length', @click='lightboxVisible = true')
         .image-card(:class=`{ multi: detail.list.length > 1 }`)
-          .image(:style='{backgroundImage: "url(/uploads/images/" + detail.list[0].filename + ")"}')
-        img.placeholder(:src='"/uploads/images/" + detail.list[0].filename')
+          .image(:style='{backgroundImage: "url(" + $store.state.oss.uri + detail.list[0].filename + ")"}')
+        img.placeholder(:src='$store.state.oss.uri + detail.list[0].filename')
       .loading(v-else, v-loading='true')
 
       .description {{ detail.description }}
@@ -19,7 +19,7 @@
     el-carousel(indicator-position='outsize', :autoplay='false', arrow='always')
       el-carousel-item(v-for='(image, index) in detail.list', :key='index')
         .image-wrap
-          img(:src='"/uploads/images/" + image.filename')
+          img(:src='$store.state.oss.uri + image.filename')
 
 </template>
 
