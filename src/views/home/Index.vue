@@ -6,7 +6,7 @@
         v-for='(image, index) in list', :key='index')
       div(style='padding: 15px;')
         el-card.card(:body-style=`{padding: '0px'}`)
-          img.image(:src='$store.state.oss.uri + image.list[0].filename', @click='gotoDetail(image._id)')
+          img.image(:src='$store.state.oss.uri + image.list[0].filename + "?x-oss-process=style/thumb"', @click='gotoDetail(image._id)')
           div(style='padding: 14px;')
             span {{ image.title }}
 
