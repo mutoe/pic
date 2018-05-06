@@ -49,7 +49,7 @@ script:
   - yarn test # api test
   - cd ..
   - yarn unit
-  - yarn e2e
+  # - yarn e2e
 
 before_deploy:
   - yarn build
