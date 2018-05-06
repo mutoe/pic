@@ -46,9 +46,10 @@ before_script:
   # - sleep 3
 
 script:
+  - yarn test # api test
+  - cd ..
   - yarn unit
-  - cd server && yarn test # api test
-  - cd .. && yarn e2e
+  - yarn e2e
 
 before_deploy:
   - yarn build
