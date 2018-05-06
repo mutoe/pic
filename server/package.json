@@ -8,7 +8,8 @@
   "private": false,
   "scripts": {
     "start": "pm2 start .pm2.yml --only server",
-    "dev": "pm2-dev index.js --timestamp"
+    "dev": "pm2-dev index.js --timestamp",
+    "test": "jest --config test/jest.conf.js --coverage --forceExit"
   },
   "dependencies": {
     "busboy": "^0.2.14",
@@ -24,5 +25,8 @@
     "lodash": "^4.17.5",
     "mongoose": "^5.0.12",
     "pm2": "^2.10.1"
+  },
+  "devDependencies": {
+    "jest": "^22.4.3"
   }
 }

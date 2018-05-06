@@ -9,13 +9,9 @@ app.use(async (ctx, next) => {
 const http = request(app.listen())
 
 describe('App server', () => {
-  it('should be work normally', () => {
-    http.get('/')
+  it('should be work normally', async () => {
+    await http.get('/')
       .expect(200)
       .expect('hello world')
   })
-})
-
-afterAll(() => {
-  app.close()
 })

@@ -20,12 +20,13 @@ cache:
 services: mongodb
 
 addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
-      - oracle-java8-set-default
+  # e2e test prepare
+  # apt:
+  #   sources:
+  #     - google-chrome
+  #   packages:
+  #     - google-chrome-stable
+  #     - oracle-java8-set-default
 
 env:
   global:
@@ -37,14 +38,17 @@ before_install: true
 install:
   - yarn global add codecov
   - yarn
+  - cd server && yarn
 
 before_script:
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3
+  # e2e test prepare
+  # - "sh -e /etc/init.d/xvfb start"
+  # - sleep 3
 
 script:
   - yarn unit
-  - yarn api
+  - cd server && yarn test # api test
+  - cd .. && yarn e2e
 
 before_deploy:
   - yarn build

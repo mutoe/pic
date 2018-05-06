@@ -122,7 +122,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       {
         from: path.resolve(__dirname, '../server'),
         to: '../server',
-        ignore: ['node_modules', '.eslintrc', 'runtime'],
+        ignore: ['node_modules', '.eslintrc', 'runtime', 'test'],
       },
     ]),
   ],
