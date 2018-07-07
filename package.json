@@ -11,7 +11,8 @@
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src server test/unit test/api test/e2e/specs",
     "build": "node build/build.js",
-    "preview": "http-server dist/ -o"
+    "preview": "http-server dist/ -o",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "dependencies": {
     "axios": "^0.18.0",
