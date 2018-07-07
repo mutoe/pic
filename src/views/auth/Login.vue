@@ -34,10 +34,10 @@ export default {
       formLogin: {
         email: 'testuser@mutoe.com',
         password: '123456',
-        remember: false,
+        remember: false
       },
       rules: { email, password },
-      btnLoading: false,
+      btnLoading: false
     }
   },
   methods: {
@@ -65,7 +65,7 @@ export default {
       this.$message.success({
         message: `😙 登陆成功`,
         iconClass: 'none',
-        customClass: 'el-message--success',
+        customClass: 'el-message--success'
       })
     },
     onError (err) {
@@ -79,10 +79,10 @@ export default {
       this.$message.error({
         message: `🙄 ${message}`,
         iconClass: 'none',
-        customClass: 'el-message--error',
+        customClass: 'el-message--error'
       })
-    },
-  },
+    }
+  }
 }
 
 </script>
@@ -90,6 +90,7 @@ export default {
 <style lang="stylus" scoped>
 
 .page
+
   .el-row
     margin $md 0
 

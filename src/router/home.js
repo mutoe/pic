@@ -9,7 +9,7 @@ export default [
   {
     path: '/',
     name: 'Index',
-    component: Index,
-  },
+    component: Index
+  }
 
 ]

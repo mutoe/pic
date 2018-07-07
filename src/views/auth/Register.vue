@@ -47,11 +47,11 @@ export default {
         email: 'testuser@mutoe.com',
         username: 'testuser',
         password: '123456',
-        agreement: true,
+        agreement: true
       },
       rules: { email, username, password, agreement },
       fieldErr: {},
-      btnLoading: false,
+      btnLoading: false
     }
   },
   methods: {
@@ -96,10 +96,10 @@ export default {
       this.$message.error({
         message: `🙄 ${message}`,
         iconClass: 'none',
-        customClass: 'el-message--error',
+        customClass: 'el-message--error'
       })
-    },
-  },
+    }
+  }
 }
 
 </script>

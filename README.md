@@ -3,7 +3,6 @@
 
 [![GitHub license](https://img.shields.io/github/license/mutoe/pic.svg?style=flat-square)](https://github.com/mutoe/pic/blob/master/LICENSE)
 [![Travis](https://img.shields.io/travis/mutoe/pic.svg?style=flat-square)](https://www.travis-ci.org/mutoe/pic)
-[![codecov](https://img.shields.io/codecov/c/github/mutoe/pic.svg?style=flat-square)](https://codecov.io/gh/mutoe/pic)
 
 > This time that is the vue + koa version of the photo sharing website.
 
@@ -16,8 +15,8 @@ yarn
 # serve with hot reload at localhost:8080
 yarn dev
 
-# run unit and e2e tests
-yarn test
+# run unit
+yarn test:unit
 
 # build for production with minification
 yarn build

@@ -13,14 +13,14 @@ export default [
     name: 'ImageCreate',
     component: ImageCreate,
     meta: {
-      retuireAuth: true,
-    },
+      retuireAuth: true
+    }
   },
 
   {
     path: '/image/:id',
     name: 'ImageRead',
-    component: ImageRead,
-  },
+    component: ImageRead
+  }
 
 ]

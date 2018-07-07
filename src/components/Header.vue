@@ -8,7 +8,7 @@ header(:class='page')
     .container
       div.left
         router-link.noline(:to=`{ name: 'Index' }`).logo
-          img(src='/static/images/logo_400x90.png', alt="时光·印象", title="返回首页")
+          img(src='/images/logo_400x90.png', alt="时光·印象", title="返回首页")
 
         a.noline(href='#') 分类
 
@@ -26,12 +26,12 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Header',
   props: {
-    page: { type: String, default: '' },
+    page: { type: String, default: '' }
   },
   computed: {
     ...mapGetters({
-      token: 'token',
-    }),
+      token: 'token'
+    })
   },
   methods: {
     onLogout () {
@@ -40,11 +40,11 @@ export default {
         this.$message.success({
           message: '😒 注销成功 哼!',
           iconClass: 'none',
-          customClass: 'el-message--success',
+          customClass: 'el-message--success'
         })
       }).catch(e => e)
-    },
-  },
+    }
+  }
 }
 </script>
 
@@ -119,7 +119,7 @@ header
   left 0
   z-index -1
   background center 65% / auto no-repeat
-  background-image url('/static/images/user_banner.jpg')
+  background-image url('/images/user_banner.jpg')
 
   .blur
     position absolute

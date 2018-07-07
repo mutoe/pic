@@ -3,7 +3,7 @@
 footer.dark(:class='page')
   .container
     div
-      img.logo(src='/static/images/logo_white.png')
+      img.logo(src='/images/logo_white.png')
 
     ul.copyright
       li 一个普通的图片分享平台
@@ -26,7 +26,7 @@ let dialogHtml = `
 export default {
   name: 'Footer',
   props: {
-    page: { type: String, default: '' },
+    page: { type: String, default: '' }
   },
   methods: {
     onMoreClick () {
@@ -37,10 +37,10 @@ export default {
         customClass: 'info-dialog dark',
         showConfirmButton: false,
         closeOnClickModal: true,
-        closeOnPressEscape: true,
+        closeOnPressEscape: true
       })
-    },
-  },
+    }
+  }
 }
 </script>
 

@@ -16,7 +16,7 @@
 export default {
   data () {
     return {
-      list: [],
+      list: []
     }
   },
   created () {
@@ -34,8 +34,8 @@ export default {
     },
     gotoDetail (id) {
       this.$router.push({ name: 'ImageRead', params: { id } })
-    },
-  },
+    }
+  }
 }
 </script>
 

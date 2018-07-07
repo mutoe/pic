@@ -20,17 +20,17 @@ export default {
   name: 'App',
   components: {
     VHeader,
-    VFooter,
+    VFooter
   },
   data () {
     return {
-      transitionName: 'fade',
+      transitionName: 'fade'
     }
   },
   computed: {
     page: function () {
       return this.$route.name.toLowerCase()
-    },
+    }
   },
   watch: {
     // 根据页面层级使用不同的过渡动画
@@ -42,8 +42,8 @@ export default {
       if (depth === 0) this.transitionName = 'fade'
       if (depth < 0) this.transitionName = 'slide-right'
       if (depth > 0) this.transitionName = 'slide-left'
-    },
-  },
+    }
+  }
 }
 </script>
 

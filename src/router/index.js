@@ -23,13 +23,13 @@ const router = new Router({
     ...ImageRouter,
 
     // 没有匹配到路由时返回首页
-    { path: '*', redirect: '/' },
+    { path: '*', redirect: '/' }
   ],
 
   // 切换到新路由时，页面滚到顶部，或保持原先的滚动位置
   scrollBehavior (to, from, savedPosition) {
     return savedPosition || { x: 0, y: 0 }
-  },
+  }
 })
 
 router.beforeEach((to, from, next) => {

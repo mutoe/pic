@@ -64,24 +64,24 @@ export default {
         Signature: '',
         host: '',
         success_action_status: 200,
-        callback: '',
+        callback: ''
       },
       upload: {
         accept: '',
         limit: 100,
         list: [],
-        listType: 'picture-card',
+        listType: 'picture-card'
       },
       dialog: {
         imageUrl: '',
         title: '',
-        visible: false,
+        visible: false
       },
       form: {
         title: '',
         description: '',
-        scope: 'all',
-      },
+        scope: 'all'
+      }
     }
   },
   mounted () {
@@ -154,8 +154,8 @@ export default {
     },
     onError (err) {
       console.warn(err)
-    },
-  },
+    }
+  }
 }
 </script>
 

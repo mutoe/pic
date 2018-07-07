@@ -2,7 +2,6 @@
 branches:
   only:
     - master
-    - develop
 
 sudo: required
 
@@ -20,36 +19,21 @@ cache:
 services: mongodb
 
 addons:
-  # e2e test prepare
-  # apt:
-  #   sources:
-  #     - google-chrome
-  #   packages:
-  #     - google-chrome-stable
-  #     - oracle-java8-set-default
 
 env:
-  global:
-    - DISPLAY=:99.0
-    - CHROME_BIN=/usr/bin/google-chrome
 
-before_install: true
+before_install:
 
 install:
-  - yarn global add codecov
   - yarn
   - cd server && yarn
 
 before_script:
-  # e2e test prepare
-  # - "sh -e /etc/init.d/xvfb start"
-  # - sleep 3
 
 script:
   - yarn test # api test
   - cd ..
   - yarn unit
-  # - yarn e2e
 
 before_deploy:
   - yarn build
@@ -64,6 +48,5 @@ deploy:
     node: stable
 
 after_deploy:
-  - codecov
 
-after_script: true
+after_script:
