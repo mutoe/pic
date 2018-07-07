@@ -1,9 +1,9 @@
 {
   "name": "pic",
   "version": "0.1.0",
-  "description": "This time is the vue + koa version of the picture site.",
+  "description": "This is the vue + koa version of the picture site.",
   "author": "mutoe <mutoe@foxmail.com>",
-  "private": false,
+  "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
