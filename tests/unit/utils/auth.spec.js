@@ -1,7 +1,6 @@
 import * as auth from '@/utils/auth'
 
 describe('utils auth', () => {
-
   it('getToken()', () => {
     expect(auth.getToken()).toBe(undefined)
   })

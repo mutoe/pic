@@ -33,7 +33,7 @@ before_script:
 script:
   - yarn test # api test
   - cd ..
-  - yarn unit
+  - yarn test:unit
 
 before_deploy:
   - yarn build

@@ -29,9 +29,7 @@ export default {
     page: { type: String, default: '' }
   },
   computed: {
-    ...mapGetters({
-      token: 'token'
-    })
+    ...mapGetters(['token']),
   },
   methods: {
     onLogout () {

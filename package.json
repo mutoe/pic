@@ -8,7 +8,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit",
+    "unit": "vue-cli-service test:unit",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
   },
   "dependencies": {
@@ -77,8 +77,9 @@
     "snapshotSerializers": [
       "jest-serializer-vue"
     ],
-    "testMatch": [
-      "<rootDir>/(tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx))"
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/server/"
     ]
   }
 }

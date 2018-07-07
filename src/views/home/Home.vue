@@ -14,9 +14,10 @@
 
 <script>
 export default {
+  name: 'Home',
   data () {
     return {
-      list: []
+      list: [],
     }
   },
   created () {
@@ -34,8 +35,8 @@ export default {
     },
     gotoDetail (id) {
       this.$router.push({ name: 'ImageRead', params: { id } })
-    }
-  }
+    },
+  },
 }
 </script>
 
