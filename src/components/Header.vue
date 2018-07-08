@@ -26,7 +26,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'Header',
   props: {
-    page: { type: String, default: '' }
+    page: { type: String, default: '' },
   },
   computed: {
     ...mapGetters(['token']),
@@ -38,11 +38,11 @@ export default {
         this.$message.success({
           message: '😒 注销成功 哼!',
           iconClass: 'none',
-          customClass: 'el-message--success'
+          customClass: 'el-message--success',
         })
       }).catch(e => e)
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -7,24 +7,24 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 
   getters: {
-    token: state => state.user.token
+    token: state => state.user.token,
   },
 
   state: {
     user: {
-      token: util.getToken()
+      token: util.getToken(),
     },
     oss: {
       uri: 'https://timeimage.oss-cn-shenzhen.aliyuncs.com/uploads/',
       host: 'https://timeimage.oss-cn-shenzhen.aliyuncs.com/',
-      path: 'uploads/'
-    }
+      path: 'uploads/',
+    },
   },
 
   mutations: {
     SET_TOKEN (state, token) {
       state.user.token = token
-    }
+    },
   },
 
   actions: {
@@ -38,9 +38,9 @@ const store = new Vuex.Store({
       commit('SET_TOKEN', '')
       Vue.prototype.$http.defaults.headers.common['Authorization'] = null
       util.removeToken()
-    }
+    },
 
-  }
+  },
 })
 
 export default store

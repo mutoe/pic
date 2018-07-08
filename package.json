@@ -47,6 +47,10 @@
     ],
     "parserOptions": {
       "parser": "babel-eslint"
+    },
+    "rules": {
+      "comma-dangle": [ "error", "always-multiline" ],
+      "object-curly-spacing": ["error", "always" ]
     }
   },
   "postcss": {

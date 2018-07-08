@@ -31,9 +31,9 @@ export default {
       detail: {
         title: '',
         description: '',
-        list: []
+        list: [],
       },
-      lightboxVisible: false
+      lightboxVisible: false,
     }
   },
   created () {
@@ -46,8 +46,8 @@ export default {
           Object.assign(this.detail, res.data.image)
         })
         .catch(err => console.warn(err))
-    }
-  }
+    },
+  },
 }
 </script>
 

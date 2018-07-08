@@ -26,7 +26,7 @@ let dialogHtml = `
 export default {
   name: 'Footer',
   props: {
-    page: { type: String, default: '' }
+    page: { type: String, default: '' },
   },
   methods: {
     onMoreClick () {
@@ -37,10 +37,10 @@ export default {
         customClass: 'info-dialog dark',
         showConfirmButton: false,
         closeOnClickModal: true,
-        closeOnPressEscape: true
+        closeOnPressEscape: true,
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
