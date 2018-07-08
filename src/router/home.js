@@ -2,14 +2,14 @@
  * Home 模块
  */
 
-import Index from '@/views/home/Index'
+import Home from '@/views/home/Home'
 
 export default [
 
   {
     path: '/',
-    name: 'Index',
-    component: Index,
+    name: 'Home',
+    component: Home,
   },
 
 ]

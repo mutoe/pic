@@ -7,14 +7,14 @@ header(:class='page')
   .nav
     .container
       div.left
-        router-link.noline(:to=`{ name: 'Index' }`).logo
+        router-link.noline.logo(:to=`{ name: 'Home' }`)
           img(src='/images/logo_400x90.png', alt="时光·印象", title="返回首页")
 
         a.noline(href='#') 分类
 
       div.right
-        router-link.noline(:to=`{ name: 'Register' }`, v-if='!token') 注册
-        router-link.noline(:to=`{ name: 'Login' }`, v-if='!token' ) 登录
+        router-link.noline(:to=`{ name: 'AuthRegister' }`, v-if='!token') 注册
+        router-link.noline(:to=`{ name: 'AuthLogin' }`, v-if='!token' ) 登录
         a.noline(href='javascript:;', @click='onLogout', v-if='token') 注销
         router-link.noline.danger(:to=`{ name: 'ImageCreate' }`, v-if='token' ) 贴图
 
@@ -40,7 +40,7 @@ export default {
           iconClass: 'none',
           customClass: 'el-message--success',
         })
-      }).catch(e => e)
+      })
     },
   },
 }

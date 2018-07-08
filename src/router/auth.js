@@ -11,14 +11,14 @@ export default [
   {
     path: '/auth/login',
     alias: '/login',
-    name: 'Login',
+    name: 'AuthLogin',
     component: Login,
   },
 
   {
     path: '/auth/register',
     alias: '/register',
-    name: 'Register',
+    name: 'AuthRegister',
     component: Register,
   },
 ]
