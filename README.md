@@ -13,10 +13,10 @@
 yarn
 
 # serve with hot reload at localhost:8080
-yarn dev
+yarn serve
 
-# run unit
-yarn test:unit
+# run unit test
+yarn unit
 
 # build for production with minification
 yarn build
