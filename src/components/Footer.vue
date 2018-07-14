@@ -7,7 +7,9 @@ footer.dark(:class='page')
 
     ul.copyright
       li 一个普通的图片分享平台
-      li: a(@click='onMoreClick' href='javascript:;') more
+      li
+        a(@click='onMoreClick' href='javascript:;') About
+        span Hosted by #[a(href='https://coding.net/v2/pages/' target='_blank') Coding Pages]
 
 </template>
 
@@ -17,7 +19,7 @@ footer.dark(:class='page')
 let dialogHtml = `
 <ul>
   <li>Coding by <a href="http://blog.mutoe.com/" target="_blank">mutoe</a>.</li>
-  <li>The code is hosted on <a href="https://github.com/mutoe/pic" target="_blank">Github</a> under MIT license.</li>
+  <li>The source code is hosted on <a href="https://github.com/mutoe/pic" target="_blank">Github</a> under MIT license.</li>
   <li>Cloud computing service provided by <a href="https://www.aliyun.com/" target="_blank">Aliyun</a>.</li>
   <li><a href="mailto:mutoe@foxmail.com?body=From http://pic.mutoe.com/ footer">Send Email to me</a>.</li>
 </ul>
@@ -31,7 +33,7 @@ export default {
   methods: {
     onMoreClick () {
       this.$msgbox({
-        title: '更多信息',
+        title: 'About',
         message: dialogHtml,
         dangerouslyUseHTMLString: true,
         customClass: 'info-dialog dark',
@@ -85,6 +87,20 @@ ul.copyright
   li
     margin 8px 0
     text-align center
+
+    > *
+      &::before
+        content '❤'
+        color $color-text-regular
+        margin 0 8px
+        transition .3s
+
+      &:first-child::before
+        content ''
+        margin 0
+
+    &:hover > *::before
+      color $color-danger
 
 </style>
 
