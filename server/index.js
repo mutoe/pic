@@ -9,7 +9,7 @@ const app = new Koa()
 const koaBody = require('koa-body')
 const router = require('./routes')
 app
-  .use(koaBody())
+  .use(koaBody({ multipart: true }))
   .use(router.routes())
   .use(router.allowedMethods())
 
