@@ -8,7 +8,9 @@ const app = new Koa()
 // mount koa middlewares
 const koaBody = require('koa-body')
 const router = require('./routes')
+const errorHandler = require('./middlewares/errorHandler')
 app
+  .use(errorHandler())
   .use(koaBody({ multipart: true }))
   .use(router.routes())
   .use(router.allowedMethods())
