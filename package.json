@@ -11,8 +11,10 @@
     "dotenv": "^6.1.0",
     "element-ui": "^2.4.5",
     "koa": "^2.5.3",
-    "mysql": "^2.16.0",
+    "mysql2": "^1.6.1",
     "register-service-worker": "^1.0.0",
+    "sequelize": "^4.41.0",
+    "sequelize-cli": "^5.2.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
