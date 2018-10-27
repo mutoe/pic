@@ -4,7 +4,7 @@ const router = new Router()
 
 // define routes
 router.post('/login', async ctx => {
-  ctx.body = 'successfully!'
+  ctx.body = ctx.request.body
 })
 
 // export router
