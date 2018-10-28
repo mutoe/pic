@@ -16,15 +16,14 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     indexes: [
-      {
-        unique: true,
-        fields: ['email'],
-      },
-      {
-        unique: true,
-        fields: ['username'],
-      },
+      { unique: true, fields: ['email'] },
+      { unique: true, fields: ['username'] },
     ],
+    validate: {
+      oneOfUsernameOrEmail () {
+        if (!this.username && !this.email) throw new Error('At least one of the username or email')
+      },
+    },
   })
   user.associate = function (models) {
     // associations can be defined here
