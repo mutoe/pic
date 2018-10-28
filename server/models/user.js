@@ -1,3 +1,5 @@
+const Utils = require('../utils')
+
 module.exports = (sequelize, DataTypes) => {
   const user = sequelize.define('user', {
     username: {
@@ -27,5 +29,10 @@ module.exports = (sequelize, DataTypes) => {
   user.associate = function (models) {
     // associations can be defined here
   }
+
+  user.hook('afterValidate', (user, options) => {
+    user.password = Utils.cryptoPassword(user.password)
+  })
+
   return user
 }
