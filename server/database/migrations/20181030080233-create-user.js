@@ -9,13 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       username: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(32),
       },
       email: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(80),
       },
       password: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(64),
       },
       created_at: {
         allowNull: false,
@@ -29,6 +29,17 @@ module.exports = {
         allowNull: true,
         type: Sequelize.DATE,
       },
+    }, {
+      indexes: [
+        {
+          unique: true,
+          fields: ['email'],
+        },
+        {
+          unique: true,
+          fields: ['username'],
+        },
+      ],
     })
   },
   down: (queryInterface, Sequelize) => {
