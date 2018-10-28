@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   }
 
-  user.hook('afterValidate', (user, options) => {
+  user.addHook('afterValidate', (user, options) => {
     user.password = Utils.cryptoPassword(user.password)
   })
 
