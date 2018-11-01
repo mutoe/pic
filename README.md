@@ -1,26 +1,22 @@
-# pic
+# TimeImage
+> ### This is the vue + koa of the photo sharing progress web application.
 
-## Project setup
-```
-yarn install
-```
+[![GitHub license](https://img.shields.io/github/license/mutoe/pic.svg?style=flat-square)](https://github.com/mutoe/pic/blob/master/LICENSE)
+[![Travis](https://img.shields.io/travis/mutoe/pic.svg?style=flat-square)](https://www.travis-ci.org/mutoe/pic)
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+## Build Setup
 
-### Run your tests
-```
-yarn run test
-```
+``` bash
+# install dependencies
+yarn
 
-### Lints and fixes files
-```
-yarn run lint
+# serve with hot reload at localhost:8080
+yarn serve
+
+# run unit test
+yarn unit
+
+# build for production with minification
+yarn build
 ```
