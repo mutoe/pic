@@ -1,6 +1,8 @@
 const databaseName = process.env.MYSQL_DATABASE || 'pic'
 
 const common = {
+  operatorsAliases: false,
+
   define: {
     timestamps: true,
     paranoid: true,
@@ -16,7 +18,6 @@ module.exports = {
     database: `${databaseName}_development`,
     host: '127.0.0.1',
     dialect: 'mysql',
-    operatorsAliases: false,
   }),
 
   test: Object.assign({}, common, {

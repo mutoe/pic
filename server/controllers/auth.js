@@ -15,10 +15,14 @@ class AuthCtrl extends Controller {
     const { username, password } = ctx.request.body
 
     try {
+      // check user unique
+      const user = await UserService.findUser({ username })
+      if (user) return Promise.reject({ code: 422, message: 'ExistUserError', error: { username } })
+
+      // create user
       const result = await UserService.create(username, undefined, password)
       ctx.body = result
     } catch (err) {
-      console.error(err)
       ctx.throw(err)
     }
   }
