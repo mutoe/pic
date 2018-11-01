@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "test": "npm run api",
+    "api": "jest --config test/api/jest.config.js"
   },
   "dependencies": {
     "dotenv": "^6.1.0",
@@ -30,8 +32,10 @@
     "babel-plugin-component": "^1.1.1",
     "eslint": "^5.7.0",
     "eslint-plugin-vue@next": "^4.7.1",
+    "jest": "^23.6.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
+    "supertest": "^3.3.0",
     "vue-cli-plugin-element": "^1.0.0",
     "vue-template-compiler": "^2.5.17"
   },
