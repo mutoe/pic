@@ -7,9 +7,10 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test": "npm run api",
-    "api": "jest --config test/api/jest.config.js"
+    "api": "cross-env NODE_ENV=test jest --config test/api/jest.config.js"
   },
   "dependencies": {
+    "cross-env": "^5.2.0",
     "dotenv": "^6.1.0",
     "element-ui": "^2.4.5",
     "koa": "^2.5.3",
