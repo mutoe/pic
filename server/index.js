@@ -1,5 +1,6 @@
 // load dotenv configuration
-require('dotenv').config()
+const envPath = process.env.NODE_ENV === 'development' ? '.env' : '.env.test'
+require('dotenv').config({ path: envPath, silent: true })
 
 // create koa instance
 const Koa = require('koa')
@@ -15,8 +16,8 @@ app
   .use(router.routes())
   .use(router.allowedMethods())
 
-// bootstrap application
-const port = process.env.APP_SERVER_LISTEN_PORT || 3001
-app.listen(port, () => {
+// bootstrap application and export app instance for API test
+const port = process.env.SERVER_LISTEN_PORT || 3001
+module.exports = app.listen(port, () => {
   console.log(`Koa is running in port ${port} successfully!`)
 })
