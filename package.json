@@ -6,8 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "npm run api",
-    "api": "cross-env NODE_ENV=test jest --config test/api/jest.config.js"
+    "test": "yarn test:api",
+    "test:api": "cross-env NODE_ENV=test jest --config test/api/jest.config.js"
   },
   "dependencies": {
     "cross-env": "^5.2.0",
