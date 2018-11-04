@@ -6,7 +6,7 @@ module.exports = () => async (ctx, next) => {
       // 应用抛出异常
       ctx.status = err.code
       const message = err.name || err.message
-      ctx.body = { message, ...err }
+      ctx.body = { ...err, message }
     } else {
       // 系统异常
       console.error(err)
