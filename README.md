@@ -2,7 +2,7 @@
 > ### This is the vue + koa of the photo sharing progress web application.
 
 [![GitHub license](https://img.shields.io/github/license/mutoe/pic.svg?style=flat-square)](https://github.com/mutoe/pic/blob/master/LICENSE)
-[![Travis](https://img.shields.io/travis/mutoe/pic.svg?style=flat-square)](https://www.travis-ci.org/mutoe/pic)
+[![Travis](https://img.shields.io/travis/mutoe/pic.svg?style=flat-square)](https://www.travis-ci.org/mutoe/pic) [![Greenkeeper badge](https://badges.greenkeeper.io/mutoe/pic.svg)](https://greenkeeper.io/)
 
 
 ## Build Setup
